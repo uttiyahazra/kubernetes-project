@@ -4,5 +4,7 @@ metadata:
   name: {{ .Values.app.name }}-config
 data:
   config.properties: |
-    property1={{ .Values.app.configmap.data.value1 }}
-    property2={{ .Values.app.configmap.data.value2 }}
+    property1={{ .Values.app.configmap.data.configproperties.value1 }}
+    property2={{ .Values.app.configmap.data.configproperties.value2 }}
+  custom.header: |
+    header={{ .Values.app.configmap.data.customheader.value }}

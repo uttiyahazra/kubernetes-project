@@ -14,5 +14,8 @@ app:
     portnumber: 8080
   configmap:
     data:
-      value1: white
-      value2: no color
+      configproperties:
+        value1: white
+        value2: no color
+      customheader:
+        value: custom-header

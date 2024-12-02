@@ -45,3 +45,7 @@ helm upgrade myk8sapp-v1.0 myk8sapp/ -n test
 
 #Helm template command to check if templating is right without changing in practical:
 helm template ./myk8sapp --debug
+
+#Helm install command with to use one base value file and to override some values from a env specific value file
+helm install myk8sapp-dev-v1.0 myk8sapp/ --values values.yaml -f values-dev.yaml -n dev
+helm install myk8sapp-prod-v1.0 myk8sapp/ --values values.yaml -f values-dev.yaml -n prod
