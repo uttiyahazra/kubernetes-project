@@ -1,3 +1,5 @@
+#Deployment with POD QoS demo wherein the depending on limits & requests values the POD QoS will be determined
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,6 +16,13 @@ spec:
     spec:
       containers:
       - name:  {{ .Values.app.name }}
-        image: "{{ .Values.app.image.name }} : {{ .Values.app.image.tag }}"
+        image: "{{ .Values.app.image.name }}:{{ .Values.app.image.tag }}"
         ports:
         - containerPort:  {{ .Values.app.container.portnumber }}
+        resources:
+          limits:
+            memory: {{ .Values.app.resources.limits.memory }}
+            cpu: {{ .Values.app.resources.limits.cpu }}
+          requests:
+            memory: {{ .Values.app.resources.requests.memory }}
+            cpu: {{ .Values.app.resources.requests.cpu }}

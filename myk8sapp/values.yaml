@@ -12,6 +12,13 @@ app:
     portnumber: 8080
   service:
     portnumber: 8080
+  resources:
+    limits:
+      memory: "320Mi"
+      cpu: "600m"
+    requests:
+      memory: "256Mi"
+      cpu: "500m"
   configmap:
     data:
       configproperties:
