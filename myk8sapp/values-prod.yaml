@@ -15,3 +15,8 @@ app:
     requests:
       memory: "256Mi"
       cpu: "200m"
+  container1:
+    readinessprobe:
+      initialDelayseconds: 10
+      successThreshold: 3
+      failureThreshold: 1

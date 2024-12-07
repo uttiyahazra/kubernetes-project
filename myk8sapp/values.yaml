@@ -15,6 +15,10 @@ app:
     portnumber: 8080
     image: nginx
     tag: latest
+    readinessprobe:
+      initialDelayseconds: 10
+      successThreshold: 1
+      failureThreshold: 1
   container2:
     name: fluentd
     portnumber: 8082
@@ -32,3 +36,4 @@ app:
   configmap:
     data:
       env: "stage specific dynamically overridden from respective value file"
+

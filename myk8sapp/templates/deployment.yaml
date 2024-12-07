@@ -45,11 +45,14 @@ spec:
             command:
             - cat
             - /etc/nginx/nginx.conf
-          initialDelayseconds: 10
+          initialDelayseconds: {{ .Values.app.container1.readinessprobe.initialDelayseconds }}
           periodSeconds: 5
           timeoutSeconds: 5
-          successThreshold: 1
-          failureThreshold: 1 
+          successThreshold: {{ .Values.app.container1.readinessprobe.successThreshold }}
+          failureThreshold: {{ .Values.app.container1.readinessprobe.failureThreshold }}
+        volumeMounts: 
+          - mountPath: /mnt 
+            name: {{ .Values.app.name }}-host-path-volume
       - name: {{ .Values.app.container2.name }}-sidecar-container
         image: "{{ .Values.app.container2.image}}:{{ .Values.app.container2.tag}}"
         ports:
@@ -61,4 +64,8 @@ spec:
           requests:
             memory: {{ .Values.app.resources.requests.memory }}
             cpu: {{ .Values.app.resources.requests.cpu }}
-    
+      volumes:
+        - name: {{ .Values.app.name }}-host-path-volume
+          hostPath: 
+            path: /tmp
+            type: Directory

@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.app.name }}-config
 data:
-    env: {{ .Values.app.configmap.data.env }}
+  env: {{ .Values.app.configmap.data.env }}
