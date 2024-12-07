@@ -31,8 +31,4 @@ app:
       cpu: "500m"
   configmap:
     data:
-      configproperties:
-        value1: white
-        value2: no color
-      customheader:
-        value: custom-header
+      env: "stage specific dynamically overridden from respective value file"

@@ -6,8 +6,7 @@ app:
   name: myk8sapp-dev
   configmap:
     data:
-      customheader:
-        value: "custom value for dev"
+      env: "This is DEV env"  
   resources:
     limits:
       memory: "256Mi"

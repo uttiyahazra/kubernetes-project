@@ -34,6 +34,22 @@ spec:
           requests:
             memory: {{ .Values.app.resources.requests.memory }}
             cpu: {{ .Values.app.resources.requests.cpu }}
+        env:
+          - name: stage
+            valueFrom: 
+              configMapKeyRef:
+                name: {{ .Values.app.name }}-config
+                key: env
+        readinessProbe: 
+          exec: 
+            command:
+            - cat
+            - /etc/nginx/nginx.conf
+          initialDelayseconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 1 
       - name: {{ .Values.app.container2.name }}-sidecar-container
         image: "{{ .Values.app.container2.image}}:{{ .Values.app.container2.tag}}"
         ports:

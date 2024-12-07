@@ -7,8 +7,7 @@ app:
   replicanumber: 2
   configmap:
     data:
-      customheader:
-        value: "custom value for prod"
+      env: "This is PROD env" 
   resources:
     limits:
       memory: "320Mi"
