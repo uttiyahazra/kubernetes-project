@@ -4,12 +4,22 @@
 
 app:
   name: myk8sapp
-  replicanumber: 2
-  image:
-    name: nginx
+  replicanumber: 1
+  initcontainer:
+    name: httpd
+    portnumber: 80
+    image: httpd
     tag: latest
-  container:
+  container1:
+    name: nginx
     portnumber: 8080
+    image: nginx
+    tag: latest
+  container2:
+    name: fluentd
+    portnumber: 8082
+    image: fluentd
+    tag: latest
   service:
     portnumber: 8080
   resources:

@@ -4,7 +4,15 @@
 
 app:
   name: myk8sapp-prod
+  replicanumber: 2
   configmap:
     data:
       customheader:
         value: "custom value for prod"
+  resources:
+    limits:
+      memory: "320Mi"
+      cpu: "300m"
+    requests:
+      memory: "256Mi"
+      cpu: "200m"

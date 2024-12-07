@@ -8,3 +8,10 @@ app:
     data:
       customheader:
         value: "custom value for dev"
+  resources:
+    limits:
+      memory: "256Mi"
+      cpu: "200m"
+    requests:
+      memory: "128Mi"
+      cpu: "100m"

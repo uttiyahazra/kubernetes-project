@@ -1,4 +1,8 @@
-#Deployment with POD QoS demo wherein the depending on limits & requests values the POD QoS will be determined
+#Deployment demo with following:
+
+#POD QoS:  depending on limits & requests values the POD QoS will be determined
+#Multi-container SideCar Design Pattern with one init Container, one app-Container and a fluentd sidecar container alongside main container
+
 
 apiVersion: apps/v1
 kind: Deployment
@@ -14,11 +18,15 @@ spec:
       labels:
         app:  {{ .Values.app.name }}
     spec:
+      initContainers:
+      - name: {{ .Values.app.initcontainer.name }}-init-container
+        image: "{{ .Values.app.initcontainer.image}}:{{ .Values.app.initcontainer.tag}}"
+        command: ["sleep", "5"]
       containers:
-      - name:  {{ .Values.app.name }}
-        image: "{{ .Values.app.image.name }}:{{ .Values.app.image.tag }}"
+      - name:  {{ .Values.app.container1.name }}-main-container
+        image: "{{ .Values.app.container1.image}}:{{ .Values.app.container1.tag}}"
         ports:
-        - containerPort:  {{ .Values.app.container.portnumber }}
+        - containerPort:  {{ .Values.app.container1.portnumber }}
         resources:
           limits:
             memory: {{ .Values.app.resources.limits.memory }}
@@ -26,3 +34,15 @@ spec:
           requests:
             memory: {{ .Values.app.resources.requests.memory }}
             cpu: {{ .Values.app.resources.requests.cpu }}
+      - name: {{ .Values.app.container2.name }}-sidecar-container
+        image: "{{ .Values.app.container2.image}}:{{ .Values.app.container2.tag}}"
+        ports:
+        - containerPort:  {{ .Values.app.container2.portnumber }}
+        resources:
+          limits:
+            memory: {{ .Values.app.resources.limits.memory }}
+            cpu: {{ .Values.app.resources.limits.cpu }}
+          requests:
+            memory: {{ .Values.app.resources.requests.memory }}
+            cpu: {{ .Values.app.resources.requests.cpu }}
+    
