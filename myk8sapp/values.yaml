@@ -12,7 +12,7 @@ app:
     tag: latest
   container1:
     name: nginx
-    portnumber: 8080
+    portnumber: 80
     image: nginx
     tag: latest
     readinessprobe:
@@ -25,7 +25,7 @@ app:
     image: fluentd
     tag: latest
   service:
-    portnumber: 8080
+    portnumber: 80
   resources:
     limits:
       memory: "320Mi"
@@ -36,4 +36,3 @@ app:
   configmap:
     data:
       env: "stage specific dynamically overridden from respective value file"
-

@@ -5,10 +5,10 @@ metadata:
 spec:
   selector:
     app: {{ .Values.app.name }}
+  labels:
+    app: {{ .Values.app.name }}
   ports:
-  - protocol: TCP
+  - name: http
+    protocol: TCP
     port: {{ .Values.app.service.portnumber }}
     targetPort: {{ .Values.app.container1.portnumber }}
-  - protocol: HTTP
-    port: {{ .Values.app.service.portnumber }}
-    targetPort: {{ .Values.app.container2.portnumber }}
