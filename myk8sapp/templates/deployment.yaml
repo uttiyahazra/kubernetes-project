@@ -44,7 +44,7 @@ spec:
           exec: 
             command:
             - cat
-            - /etc/nginx/nginx.conf
+            - /etc/resolv.conf
           initialDelayseconds: {{ .Values.app.container1.readinessprobe.initialDelayseconds }}
           periodSeconds: 5
           timeoutSeconds: 5

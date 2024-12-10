@@ -11,10 +11,10 @@ app:
     image: httpd
     tag: latest
   container1:
-    name: nginx
-    portnumber: 80
-    image: nginx
-    tag: latest
+    name: test-prometheus-app
+    portnumber: 8080
+    image: quay.io/brancz/prometheus-example-app
+    tag: v0.3.0
     readinessprobe:
       initialDelayseconds: 10
       successThreshold: 1
