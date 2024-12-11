@@ -81,7 +81,7 @@ helm upgrade myk8sapp-prod-v1.0 myk8sapp/ --values myk8sapp/values.yaml -f myk8s
 After the Helm chart deployment of the application, we have made the deployed application accessible from outside of Cluster using NGINX
 Ingress Controller. The below steps are followed:
 
-1. Following the instructions as mentioned in [official documentation] (https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop) the nginx-ingress Controller is installed using kubectl manifest files.
+1. Following the instructions as mentioned in official documentation https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop the nginx-ingress Controller is installed using kubectl manifest files.
 
 2. The corresponding _spec.ingressClassName: "nginx"_ must be mentioned in respective ingress configuration.
 
@@ -97,12 +97,12 @@ Ingress Controller. The below steps are followed:
 
 4. Afterwards the deployed app (staged) can be accessed invoking requisite URLs, as follows:
 
-DEV: [myk8sapp-dev] (http://myk8sapp-dev.ingress.com)
-PROD:[myk8sapp-prod] (http://myk8sapp-prod.ingress.com) 
+DEV: http://myk8sapp-dev.ingress.com
+PROD: http://myk8sapp-prod.ingress.com
 
 Please note, the ingress is still not secured by any TLS secret. 
 
-5. Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV [/metrics] (http://myk8sapp-dev.ingress.com/metrics) or PROD [/metrics] (http://myk8sapp-prod.ingress.com/metrics) endpoints, the following metrics will be visible
+5. Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV http://myk8sapp-dev.ingress.com/metrics or PROD http://myk8sapp-prod.ingress.com/metrics endpoints, the following metrics will be visible
 
 ```bash
 # HELP http_request_duration_seconds Duration of all HTTP requests
@@ -130,6 +130,6 @@ version{version="v0.3.0"} 1
 ```
 #### Accessing the Prometheus and Grafana endpoints & visualization
 
-1. Following the official GitHub documentation of [kube-promethus-stack] (https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) the kube-prometheus-stack was installed.
+1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
 
-2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of http://prometheus.ingress.com/ and [Grafana] (http://prometheus-grafana.ingress.com/) were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
+2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of http://prometheus.ingress.com/ and http://prometheus-grafana.ingress.com/ were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
