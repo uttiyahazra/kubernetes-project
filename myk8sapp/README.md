@@ -132,4 +132,4 @@ version{version="v0.3.0"} 1
 
 1. Following the official GitHub documentation of [kube-promethus-stack] (https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) the kube-prometheus-stack was installed.
 
-2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of [Promethus] (http://prometheus.ingress.com/) and [Grafana] (http://prometheus-grafana.ingress.com/) were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
+2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of (http://prometheus.ingress.com/) and [Grafana] (http://prometheus-grafana.ingress.com/) were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
