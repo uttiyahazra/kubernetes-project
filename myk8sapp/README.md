@@ -75,6 +75,17 @@ helm install myk8sapp-prod-v1.0 myk8sapp/ --values myk8sapp/values.yaml -f myk8s
 helm upgrade myk8sapp-dev-v1.0 myk8sapp/ --values myk8sapp/values.yaml -f myk8sapp/values-dev.yaml -n dev
 helm upgrade myk8sapp-prod-v1.0 myk8sapp/ --values myk8sapp/values.yaml -f myk8sapp/values-dev.yaml -n prod
 ```
+##### Helm install command for installation of kube-prometheus stack operator
+```bash
+helm install prometheus prometheus-community/kube-prometheus-stack     #Here "prometheus" is used as RELEASENAME
+```
+
+##### Helm command for installation of Prometheus Exporter of MongoDB (with overriding of some default values)
+```bash
+helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporter --values myk8sapp/values-mongodb-exporter.yaml 
+
+#Here "prometheus-exporter" is used as RELEASENAME
+```
 
 #### Accessing deployed application through NGINX Ingress
 
@@ -138,7 +149,7 @@ version{version="v0.3.0"} 1
 
 Since MongoDB doesn't automatically expose its metrics to Prometheus endpoint, a deployment of Prometheus-exporter for MongoDB is thus necessary to pull its metrics and make these scrapable by Prometheus endpoint.
 
-1. Following the instructions mentioned in official GitHub documentation of prometheus-exporter of mongodb https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-modbus-exporter the MongoDB Prometheus was installed. Due to the different MongoDB Service name and label used to make the prometheus-exporter  ServiceMonitor discoverable by deployed kube-prometheus stack, during the installation using a custom value file the following values were overridden:
+1. Following the instructions mentioned in official GitHub documentation of prometheus-exporter of mongodb https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-mongodb-exporter the MongoDB Prometheus was installed. Due to the different MongoDB Service name and label used to make the prometheus-exporter ServiceMonitor discoverable by deployed kube-prometheus stack, during the installation using a custom value file the following values were overridden:
 
 ```yaml 
 mongodb:
