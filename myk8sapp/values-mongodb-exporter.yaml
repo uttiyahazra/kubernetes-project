@@ -1,0 +1,10 @@
+# If the multi-target mode is enabled, this value will be ignored.
+# [mongodb[+srv]://][user:pass@]host1[:port1][,host2[:port2],...][/database][?options]
+mongodb:
+  uri: "mongodb://myk8sappdb-service:27017"
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: prometheus
+

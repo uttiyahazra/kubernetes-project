@@ -36,3 +36,11 @@ app:
   configmap:
     data:
       env: "stage specific dynamically overridden from respective value file"
+
+db:
+  name: myk8sappdb
+  replicanumber: 1
+  container1:
+    image: mongo
+    portnumber: 27017
+

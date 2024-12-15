@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: prometheus-myk8sappdb-exporter-ingress
+  namespace: default  #must be the same namespace where kube-prometheus stack is installed
+spec:
+  ingressClassName: "nginx"
+  rules:
+  - host: prometheus-myk8sappdb-exporter.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-exporter-prometheus-mongodb-exporter
+            port: 
+              number: 9216

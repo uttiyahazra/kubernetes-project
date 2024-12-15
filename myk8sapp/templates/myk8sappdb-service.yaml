@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ .Values.db.name }}-service
+spec:
+  selector:
+    app:  {{ .Values.db.name }}
+  labels:
+    app:  {{ .Values.db.name }}
+  ports:
+  - name: mongo
+    protocol: TCP
+    port: {{ .Values.db.container1.portnumber }}
+    targetPort: {{ .Values.db.container1.portnumber }}

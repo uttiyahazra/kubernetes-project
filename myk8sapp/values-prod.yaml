@@ -20,3 +20,11 @@ app:
       initialDelayseconds: 10
       successThreshold: 3
       failureThreshold: 1
+
+
+db:
+  container1:
+    readinessprobe:
+      initialDelayseconds: 5
+      successThreshold: 3
+      failureThreshold: 1
