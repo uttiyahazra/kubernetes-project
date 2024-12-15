@@ -133,3 +133,21 @@ version{version="v0.3.0"} 1
 1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
 
 2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of http://prometheus.ingress.com/ and http://prometheus-grafana.ingress.com/ were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
+
+#### Deployment of Prometheus Exporter for MongoDB to make MongoDB metrics fetched in Prometheus endpoint
+
+Since MongoDB doesn't automatically expose its metrics to Prometheus endpoint, a deployment of Prometheus-exporter for MongoDB is thus necessary to pull its metrics and make these scrapable by Prometheus endpoint.
+
+1. Following the instructions mentioned in official GitHub documentation of prometheus-exporter of mongodb https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-modbus-exporter the MongoDB Prometheus was installed. Due to the different MongoDB Service name and label used to make the prometheus-exporter  ServiceMonitor discoverable by deployed kube-prometheus stack, during the installation using a custom value file the following values were overridden:
+
+```yaml 
+mongodb:
+  uri: "mongodb://myk8sappdb-service:27017"
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: prometheus
+```
+
+2. To make the MongoDB Prometheus endpoints accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of http://prometheus-myk8sappdb-exporter.ingress.com was whitelisted in .../etc/hosts configuration. Afterwards the MongoDB ServiceMontor was accessible by calling the http://prometheus.ingress.com/targets endpoint.
