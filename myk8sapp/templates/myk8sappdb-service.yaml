@@ -5,8 +5,6 @@ metadata:
 spec:
   selector:
     app:  {{ .Values.db.name }}
-  labels:
-    app:  {{ .Values.db.name }}
   ports:
   - name: mongo
     protocol: TCP

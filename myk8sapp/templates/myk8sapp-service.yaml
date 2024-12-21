@@ -5,8 +5,6 @@ metadata:
 spec:
   selector:
     app: {{ .Values.app.name }}
-  labels:
-    app: {{ .Values.app.name }}
   ports:
   - name: http
     protocol: TCP
