@@ -3,7 +3,6 @@
 # Declare variables to be passed into your templates.
 
 app:
-  name: myk8sapp
   replicanumber: 1
   initcontainer:
     name: httpd
@@ -38,7 +37,6 @@ app:
       env: "stage specific dynamically overridden from respective value file"
 
 db:
-  name: myk8sappdb
   replicanumber: 1
   container1:
     image: mongo
