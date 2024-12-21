@@ -21,6 +21,7 @@ app:
       failureThreshold: 1
 
 db:
+  name: myk8sappdb-dev
   container1:
     readinessprobe:
       initialDelayseconds: 3
