@@ -28,12 +28,7 @@ spec:
         ports:
         - containerPort:  {{ .Values.app.container1.portnumber }}
         resources:
-          limits:
-            memory: {{ .Values.app.resources.limits.memory }}
-            cpu: {{ .Values.app.resources.limits.cpu }}
-          requests:
-            memory: {{ .Values.app.resources.requests.memory }}
-            cpu: {{ .Values.app.resources.requests.cpu }}
+          {{ .Values.app.resources | toYaml | nindent 10}}
         env:
           - name: stage
             valueFrom: 
@@ -58,12 +53,7 @@ spec:
         ports:
         - containerPort:  {{ .Values.app.container2.portnumber }}
         resources:
-          limits:
-            memory: {{ .Values.app.resources.limits.memory }}
-            cpu: {{ .Values.app.resources.limits.cpu }}
-          requests:
-            memory: {{ .Values.app.resources.requests.memory }}
-            cpu: {{ .Values.app.resources.requests.cpu }}
+          {{ .Values.app.resources | toYaml | nindent 10}}
       volumes:
         - name: {{ .Values.app.name }}-host-path-volume
           hostPath: 

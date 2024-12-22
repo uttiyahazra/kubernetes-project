@@ -8,15 +8,4 @@ metadata:
     alb.ingress.kubernetes.io/ssl-passthrough: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
-  ingressClassName: "nginx"
-  rules:
-  - host: argocd-server.ingress.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              number: 443
+  {{ .Values.argocdServerIngressSpec | toYaml | nindent 2 }}

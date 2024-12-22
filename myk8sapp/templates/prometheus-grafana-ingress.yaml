@@ -4,15 +4,4 @@ metadata:
   name: prometheus-grafana-ingress
   namespace: default  #must be the same namespace where kube-prometheus stack is installed
 spec:
-  ingressClassName: "nginx"
-  rules:
-  - host: prometheus-grafana.ingress.com
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: prometheus-grafana
-            port: 
-              number: 80
+  {{ .Values.prometheusGrafanaIngressSpec | toYaml | nindent 2}}

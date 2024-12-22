@@ -9,11 +9,11 @@ app:
       env: "This is DEV env"  
   resources:
     limits:
-      memory: "256Mi"
-      cpu: "200m"
+      memory: 256Mi
+      cpu: 200m
     requests:
-      memory: "128Mi"
-      cpu: "100m"
+      memory: 128Mi
+      cpu: 100m
   container1:
     readinessprobe:
       initialDelayseconds: 5

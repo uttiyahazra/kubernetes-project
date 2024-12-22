@@ -27,11 +27,11 @@ app:
     portnumber: 80
   resources:
     limits:
-      memory: "320Mi"
-      cpu: "600m"
+      memory: 320Mi
+      cpu: 600m
     requests:
-      memory: "256Mi"
-      cpu: "500m"
+      memory: 256Mi
+      cpu: 500m
   configmap:
     data:
       env: "stage specific dynamically overridden from respective value file"
@@ -42,3 +42,58 @@ db:
     image: mongo
     portnumber: 27017
 
+prometheusIngressSpec:
+  ingressClassName: "nginx"
+  rules:
+  - host: prometheus.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-kube-prometheus-prometheus
+            port: 
+              number: 9090
+
+argocdServerIngressSpec:
+  ingressClassName: "nginx"
+  rules:
+  - host: argocd-server.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 443
+
+prometheusGrafanaIngressSpec:
+  ingressClassName: "nginx"
+  rules:
+  - host: prometheus-grafana.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-grafana
+            port: 
+              number: 80
+
+prometheusExporterIngressSpec:
+  ingressClassName: "nginx"
+  rules:
+  - host: prometheus-myk8sappdb-exporter.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-exporter-prometheus-mongodb-exporter
+            port: 
+              number: 9216

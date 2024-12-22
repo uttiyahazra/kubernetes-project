@@ -10,11 +10,11 @@ app:
       env: "This is PROD env" 
   resources:
     limits:
-      memory: "320Mi"
-      cpu: "300m"
+      memory: 320Mi
+      cpu: 300m
     requests:
-      memory: "256Mi"
-      cpu: "200m"
+      memory: 256Mi
+      cpu: 200m
   container1:
     readinessprobe:
       initialDelayseconds: 10
