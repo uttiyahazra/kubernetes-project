@@ -11,6 +11,4 @@ spec:
   - from:
     - ipBlock:
         cidr: 127.0.0.1/32
-    - namespaceSelector:
-        matchLabels:
-          kubernetes.io/metadata.name: ingress-nginx
+
