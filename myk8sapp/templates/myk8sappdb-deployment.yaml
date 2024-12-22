@@ -16,7 +16,7 @@ spec:
       labels:
         app:  {{ .Values.db.name }}
     spec:
-      containers:
+      containers:                                         # Resources values are not pre-defined to make the Pod QoS Guaranteed
       - name:  {{ .Values.db.name }}-container
         image: {{ .Values.db.container1.image}}
         ports:

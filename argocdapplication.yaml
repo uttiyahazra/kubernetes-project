@@ -1,0 +1,398 @@
+apiVersion: v1
+items:
+- apiVersion: argoproj.io/v1alpha1
+  kind: Application
+  metadata:
+    creationTimestamp: "2024-12-21T13:37:27Z"
+    generation: 209
+    name: myk8sapp-dev
+    namespace: argocd
+    resourceVersion: "144201"
+    uid: 612dca8f-8464-45ae-88e9-f167a5551546
+  spec:
+    destination:
+      namespace: dev
+      server: https://kubernetes.default.svc
+    project: default
+    source:
+      helm:
+        valueFiles:
+        - values.yaml
+        - values-dev.yaml
+        - values-mongodb-exporter.yaml
+      path: myk8sapp
+      repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+      targetRevision: master
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+  status:
+    controllerNamespace: argocd
+    health:
+      status: Healthy
+    history:
+    - deployStartedAt: "2024-12-21T13:37:28Z"
+      deployedAt: "2024-12-21T13:37:31Z"
+      id: 0
+      initiatedBy:
+        automated: true
+      revision: b83d401d1b5bf61f9340c820da60621b20ed57e3
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - values-dev.yaml
+          - values-mongodb-exporter.yaml
+        path: myk8sapp
+        repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+        targetRevision: master
+    - deployStartedAt: "2024-12-21T13:41:53Z"
+      deployedAt: "2024-12-21T13:41:58Z"
+      id: 1
+      initiatedBy:
+        automated: true
+      revision: c2b275ae3dc21d30bb46feb17d7fc5b1ec8eee15
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - values-dev.yaml
+          - values-mongodb-exporter.yaml
+        path: myk8sapp
+        repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+        targetRevision: master
+    - deployStartedAt: "2024-12-22T17:56:24Z"
+      deployedAt: "2024-12-22T17:56:29Z"
+      id: 2
+      initiatedBy:
+        automated: true
+      revision: 34763bf9f230a7871ab9c66467b533fa17476afc
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - values-dev.yaml
+          - values-mongodb-exporter.yaml
+        path: myk8sapp
+        repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+        targetRevision: master
+    - deployStartedAt: "2024-12-22T19:23:15Z"
+      deployedAt: "2024-12-22T19:23:19Z"
+      id: 3
+      initiatedBy:
+        automated: true
+      revision: 7962893806047a8ecf78822fbb860d6d0e51f5c7
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - values-dev.yaml
+          - values-mongodb-exporter.yaml
+        path: myk8sapp
+        repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+        targetRevision: master
+    - deployStartedAt: "2024-12-22T19:24:50Z"
+      deployedAt: "2024-12-22T19:24:52Z"
+      id: 4
+      initiatedBy:
+        automated: true
+      revision: 20793742af6485e6e003e4c82e099ba64154ff1a
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - values-dev.yaml
+          - values-mongodb-exporter.yaml
+        path: myk8sapp
+        repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+        targetRevision: master
+    - deployStartedAt: "2024-12-22T19:29:52Z"
+      deployedAt: "2024-12-22T19:29:54Z"
+      id: 5
+      initiatedBy:
+        automated: true
+      revision: 5564ee3a5eb8e33fbaffea3a2d3bb60acc5e6d8d
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - values-dev.yaml
+          - values-mongodb-exporter.yaml
+        path: myk8sapp
+        repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+        targetRevision: master
+    - deployStartedAt: "2024-12-22T19:36:46Z"
+      deployedAt: "2024-12-22T19:36:51Z"
+      id: 6
+      initiatedBy:
+        automated: true
+      revision: 7a9fc0f308889394797982c004fd4f73dd6813c8
+      source:
+        helm:
+          valueFiles:
+          - values.yaml
+          - values-dev.yaml
+          - values-mongodb-exporter.yaml
+        path: myk8sapp
+        repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+        targetRevision: master
+    operationState:
+      finishedAt: "2024-12-22T19:36:51Z"
+      message: successfully synced (all tasks run)
+      operation:
+        initiatedBy:
+          automated: true
+        retry:
+          limit: 5
+        sync:
+          autoHealAttemptsCount: 9
+          prune: true
+          revision: 7a9fc0f308889394797982c004fd4f73dd6813c8
+      phase: Succeeded
+      startedAt: "2024-12-22T19:36:46Z"
+      syncResult:
+        resources:
+        - group: networking.k8s.io
+          hookPhase: Succeeded
+          kind: NetworkPolicy
+          message: pruned
+          name: myk8sapp-networkpolicy-test-deny-all
+          namespace: dev
+          status: Pruned
+          syncPhase: Sync
+          version: v1
+        - group: networking.k8s.io
+          hookPhase: Succeeded
+          kind: NetworkPolicy
+          message: pruned
+          name: prometheus-networkpolicy
+          namespace: default
+          status: Pruned
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: ServiceAccount
+          message: serviceaccount/myk8sapp-dev-sa unchanged
+          name: myk8sapp-dev-sa
+          namespace: dev
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: ConfigMap
+          message: configmap/myk8sapp-dev-config unchanged
+          name: myk8sapp-dev-config
+          namespace: dev
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/myk8sappdb-dev-service unchanged
+          name: myk8sappdb-dev-service
+          namespace: dev
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: ""
+          hookPhase: Running
+          kind: Service
+          message: service/myk8sapp-dev-service unchanged
+          name: myk8sapp-dev-service
+          namespace: dev
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          kind: Deployment
+          message: deployment.apps/myk8sapp-dev configured
+          name: myk8sapp-dev
+          namespace: dev
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: apps
+          hookPhase: Running
+          kind: Deployment
+          message: deployment.apps/myk8sappdb-dev configured
+          name: myk8sappdb-dev
+          namespace: dev
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: networking.k8s.io
+          hookPhase: Running
+          kind: Ingress
+          message: ingress.networking.k8s.io/myk8sapp-dev-ingress unchanged
+          name: myk8sapp-dev-ingress
+          namespace: dev
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: networking.k8s.io
+          hookPhase: Running
+          kind: Ingress
+          message: ingress.networking.k8s.io/prometheus-kube-prometheus-prometheus-ingress
+            unchanged
+          name: prometheus-kube-prometheus-prometheus-ingress
+          namespace: default
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: networking.k8s.io
+          hookPhase: Running
+          kind: Ingress
+          message: ingress.networking.k8s.io/prometheus-myk8sappdb-exporter-ingress
+            unchanged
+          name: prometheus-myk8sappdb-exporter-ingress
+          namespace: default
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: networking.k8s.io
+          hookPhase: Running
+          kind: Ingress
+          message: ingress.networking.k8s.io/prometheus-grafana-ingress unchanged
+          name: prometheus-grafana-ingress
+          namespace: default
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        - group: networking.k8s.io
+          hookPhase: Running
+          kind: Ingress
+          message: ingress.networking.k8s.io/argocd-server-ingress unchanged
+          name: argocd-server-ingress
+          namespace: argocd
+          status: Synced
+          syncPhase: Sync
+          version: v1
+        revision: 7a9fc0f308889394797982c004fd4f73dd6813c8
+        source:
+          helm:
+            valueFiles:
+            - values.yaml
+            - values-dev.yaml
+            - values-mongodb-exporter.yaml
+          path: myk8sapp
+          repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+          targetRevision: master
+    reconciledAt: "2024-12-22T19:41:12Z"
+    resources:
+    - kind: ConfigMap
+      name: myk8sapp-dev-config
+      namespace: dev
+      status: Synced
+      version: v1
+    - health:
+        status: Healthy
+      kind: Service
+      name: myk8sapp-dev-service
+      namespace: dev
+      status: Synced
+      version: v1
+    - health:
+        status: Healthy
+      kind: Service
+      name: myk8sappdb-dev-service
+      namespace: dev
+      status: Synced
+      version: v1
+    - kind: ServiceAccount
+      name: myk8sapp-dev-sa
+      namespace: dev
+      status: Synced
+      version: v1
+    - group: apps
+      health:
+        status: Healthy
+      kind: Deployment
+      name: myk8sapp-dev
+      namespace: dev
+      status: Synced
+      version: v1
+    - group: apps
+      health:
+        status: Healthy
+      kind: Deployment
+      name: myk8sappdb-dev
+      namespace: dev
+      status: Synced
+      version: v1
+    - group: networking.k8s.io
+      health:
+        status: Healthy
+      kind: Ingress
+      name: argocd-server-ingress
+      namespace: argocd
+      status: Synced
+      version: v1
+    - group: networking.k8s.io
+      health:
+        status: Healthy
+      kind: Ingress
+      name: prometheus-grafana-ingress
+      namespace: default
+      status: Synced
+      version: v1
+    - group: networking.k8s.io
+      health:
+        status: Healthy
+      kind: Ingress
+      name: prometheus-kube-prometheus-prometheus-ingress
+      namespace: default
+      status: Synced
+      version: v1
+    - group: networking.k8s.io
+      health:
+        status: Healthy
+      kind: Ingress
+      name: prometheus-myk8sappdb-exporter-ingress
+      namespace: default
+      status: Synced
+      version: v1
+    - group: networking.k8s.io
+      health:
+        status: Healthy
+      kind: Ingress
+      name: myk8sapp-dev-ingress
+      namespace: dev
+      status: Synced
+      version: v1
+    sourceType: Helm
+    summary:
+      externalURLs:
+      - http://argocd-server.ingress.com/
+      - http://myk8sapp-dev.ingress.com/
+      - http://prometheus-grafana.ingress.com/
+      - http://prometheus-myk8sappdb-exporter.ingress.com/
+      - http://prometheus.ingress.com/
+      images:
+      - fluentd:latest
+      - httpd:latest
+      - mongo
+      - quay.io/brancz/prometheus-example-app:v0.3.0
+    sync:
+      comparedTo:
+        destination:
+          namespace: dev
+          server: https://kubernetes.default.svc
+        source:
+          helm:
+            valueFiles:
+            - values.yaml
+            - values-dev.yaml
+            - values-mongodb-exporter.yaml
+          path: myk8sapp
+          repoURL: https://github.com/uttiyahazra/uttiyahazra.github.io.git
+          targetRevision: master
+      revision: 7a9fc0f308889394797982c004fd4f73dd6813c8
+      status: Synced
+kind: List
+metadata:
+  resourceVersion: ""

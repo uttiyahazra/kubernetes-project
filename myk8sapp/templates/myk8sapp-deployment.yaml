@@ -1,7 +1,5 @@
-#Deployment demo with following:
-
-#POD QoS:  depending on limits & requests values the POD QoS will be determined
-#Multi-container SideCar Design Pattern with one init Container, one app-Container and a fluentd sidecar container alongside main container
+# In this Deployment YAML Manifest, common configuration tasks for Pods & Containers will be illustrated. 
+#Source documentation: https://kubernetes.io/docs/tasks/configure-pod-container/
 
 
 apiVersion: apps/v1
@@ -28,7 +26,12 @@ spec:
         ports:
         - containerPort:  {{ .Values.app.container1.portnumber }}
         resources:
-          {{ .Values.app.resources | toYaml | nindent 10}}
+          {{ .Values.app.resources | toYaml | nindent 10}}                  # Resources values will be fetched from values file to make the Pod QoS Burstable
+        resizePolicy:                                                       #if desired requests or limits for both CPU and memory have changed, the container will not be restarted in order to resize its memory.
+          - resourceName: memory
+            restartPolicy: NotRequired 
+          - resourceName: cpu
+            restartPolicy: NotRequired 
         env:
           - name: stage
             valueFrom: 
@@ -52,7 +55,7 @@ spec:
         image: "{{ .Values.app.container2.image}}:{{ .Values.app.container2.tag}}"
         ports:
         - containerPort:  {{ .Values.app.container2.portnumber }}
-        resources:
+        resources:                                                                              # Resources values will be fetched from values file to make the Pod QoS Burstable
           {{ .Values.app.resources | toYaml | nindent 10}}
       volumes:
         - name: {{ .Values.app.name }}-host-path-volume
