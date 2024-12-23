@@ -98,11 +98,11 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
     - ##### Example snippet from ...\etc\hosts file:
 
-```bash 
-127.0.0.1 kubernetes.docker.internal
-127.0.0.1 myk8sapp-dev.ingress.com
-127.0.0.1 myk8sapp-prod.ingress.com
-```
+    ```bash 
+    127.0.0.1 kubernetes.docker.internal
+    127.0.0.1 myk8sapp-dev.ingress.com
+    127.0.0.1 myk8sapp-prod.ingress.com
+    ```
 
   4. Afterwards the deployed app (staged) can be accessed invoking requisite URLs, as follows:
 
@@ -194,17 +194,18 @@ spec:
     - --feature-gates=InPlacePodVerticalScaling=true
 ```
 
-Afterwards, the necessarz resizePolicy was added in respective deployment manifest _myk8sapp-deployment.yaml_ file as follows:
+Afterwards, the necessary _resizePolicy_ specification was added in respective deployment manifest _myk8sapp-deployment.yaml_ file as follows:
 
 ```yaml
-      containers:
-        ...
-        ...               
-        resizePolicy:                                                      
-        - resourceName: memory                                             
-          restartPolicy: NotRequired 
-        - resourceName: cpu
-          restartPolicy: NotRequired 
+spec:
+  containers:
+    ...
+    ...               
+    resizePolicy:                                                      
+    - resourceName: memory                                             
+      restartPolicy: NotRequired 
+    - resourceName: cpu
+      restartPolicy: NotRequired 
 ```
 2. ##### Exemplification of different Pod QoS
 
