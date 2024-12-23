@@ -1,5 +1,4 @@
-#
-#### Important Git and Helm commands checklist during application deployment
+- #### Deployment of a staged application with Helm
 
 ##### Pull the current status of GIT in respective branch:
 ```bash
@@ -87,7 +86,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 #Here "prometheus-exporter" is used as RELEASENAME
 ```
 
-#### Accessing deployed application through NGINX Ingress
+- #### Deployment of NGINX Ingress Controller and Accessing applications through Ingress
 
 After the Helm chart deployment of the application, we have made the deployed application accessible from outside of Cluster using NGINX
 Ingress Controller. The below steps are followed:
@@ -139,13 +138,13 @@ http_requests_total{code="200",method="get"} 29
 # TYPE version gauge
 version{version="v0.3.0"} 1
 ```
-#### Accessing the Prometheus and Grafana endpoints & visualization
+- #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
 
 1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
 
 2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of http://prometheus.ingress.com/ and http://prometheus-grafana.ingress.com/ were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
 
-#### Deployment of Prometheus Exporter for MongoDB to make MongoDB metrics fetched in Prometheus endpoint
+- #### Deployment of Prometheus-Exporter for a MongoDB Application to make MongoDB metrics fetched in Prometheus endpoint
 
 Since MongoDB doesn't automatically expose its metrics to Prometheus endpoint, a deployment of Prometheus-exporter for MongoDB is thus necessary to pull its metrics and make these scrapable by Prometheus endpoint.
 
@@ -163,14 +162,15 @@ serviceMonitor:
 
 2. To make the MongoDB Prometheus endpoints accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of http://prometheus-myk8sappdb-exporter.ingress.com was whitelisted in .../etc/hosts configuration. Afterwards the MongoDB ServiceMontor was accessible by calling the http://prometheus.ingress.com/targets endpoint.
 
-#### Facilitating Continuous Deployment with ArgoCD
+- #### Deployment of ArgoCD and Leveraging Continuos Deployment with it
 
 1. Following the official ArgoCD documentation https://argo-cd.readthedocs.io/en/stable/getting_started/ the ArgoCD was installed in ths K8s cluster.
 
 2. To make the ArgoCD UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of https://argocd-server.ingress.com/ was whitelisted in .../etc/hosts configuration.
 
-#### Illustration of Kubernetes Pod & Container specific tasks
-##### Exemplification of In Place Container's CPU & Memory Resource Adjustment
+- #### Illustration of following Kubernetes Pod & Container specific tasks:
+
+1. ##### Exemplification of In Place Container's CPU & Memory Resource Adjustment
 
 Following the official documentation https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/,  the the feature-gate _InPlacePodVerticalScaling_ must be activated in kube-api server by executing following commands in current docker-desktop provided k8s cluster environment:
 
@@ -209,7 +209,7 @@ Afterwards, the necessarz resizePolicy was added in respective deployment manife
         - resourceName: cpu
           restartPolicy: NotRequired 
 ```
-##### Exemplification of different Pod QoS
+2. ##### Exemplification of different Pod QoS
 
 It can be observed from the same above stated command output that the Pod QoS has been designated as _Burstable_ as the _resources.limits_ values are configured higher than the _resources.requests_ values for the deployment _myk8sapp-deployment_ which are fecthed from helm value file at runtime:
 
