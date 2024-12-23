@@ -98,11 +98,11 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
     - ##### Example snippet from ...\etc\hosts file:
 
-```bash 
+    ```bash 
     127.0.0.1 kubernetes.docker.internal
     127.0.0.1 myk8sapp-dev.ingress.com
     127.0.0.1 myk8sapp-prod.ingress.com
-```
+    ```
 
   4. Afterwards the deployed app (staged) can be accessed invoking requisite URLs, as follows:
 
@@ -111,30 +111,30 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
   5. Please note, the ingress is still not secured by any TLS secret. Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV http://myk8sapp-dev.ingress.com/metrics or PROD http://myk8sapp-prod.ingress.com/metrics endpoints, the following metrics will be visible: 
 
-```bash
-  # HELP http_request_duration_seconds Duration of all HTTP requests
-  # TYPE http_request_duration_seconds histogram
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.005"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.01"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.025"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.05"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.1"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.25"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.5"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="1"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="2.5"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="5"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="10"} 29
-  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="+Inf"} 29
-  http_request_duration_seconds_sum{code="200",handler="found",method="get"} 0.0025533689999999993
-  http_request_duration_seconds_count{code="200",handler="found",method="get"} 29
-  # HELP http_requests_total Count of all HTTP requests
-  # TYPE http_requests_total counter
-  http_requests_total{code="200",method="get"} 29
-  # HELP version Version information about this binary
-  # TYPE version gauge
-  version{version="v0.3.0"} 1
-  ```
+    ```bash
+    # HELP http_request_duration_seconds Duration of all HTTP requests
+    # TYPE http_request_duration_seconds histogram
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.005"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.01"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.025"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.05"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.1"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.25"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.5"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="1"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="2.5"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="5"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="10"} 29
+    http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="+Inf"} 29
+    http_request_duration_seconds_sum{code="200",handler="found",method="get"} 0.0025533689999999993
+    http_request_duration_seconds_count{code="200",handler="found",method="get"} 29
+    # HELP http_requests_total Count of all HTTP requests
+    # TYPE http_requests_total counter
+    http_requests_total{code="200",method="get"} 29
+    # HELP version Version information about this binary
+    # TYPE version gauge
+    version{version="v0.3.0"} 1
+    ```
  - #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
 
    1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
@@ -180,7 +180,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
   ```bash
   kubectl get pod/kube-apiserver-docker-desktop -n kube-system -o yaml
   ```
-Wherein the following added feature-gate is worth noticing:
+  Wherein the following added feature-gate is worth noticing:
 
   ```yaml 
   ...
