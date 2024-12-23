@@ -54,4 +54,4 @@ version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51b
 - ##### [Illustration of following Kubernetes Pod & Container specific tasks:](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#illustration-of-following-kubernetes-pod--container-specific-tasks)
   1. ###### [In Place Container's CPU & Memory Resource Adjustment](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#exemplification-of-in-place-containers-cpu--memory-resource-adjustment)
   2. ###### [Different Pod QoS in action](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#exemplification-of-different-pod-qos)
-... _to be continued _
+_to be continued _
