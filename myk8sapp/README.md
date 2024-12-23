@@ -98,11 +98,11 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
     - ##### Example snippet from ...\etc\hosts file:
 
-    ```bash 
+```bash 
     127.0.0.1 kubernetes.docker.internal
     127.0.0.1 myk8sapp-dev.ingress.com
     127.0.0.1 myk8sapp-prod.ingress.com
-    ```
+```
 
   4. Afterwards the deployed app (staged) can be accessed invoking requisite URLs, as follows:
 
@@ -112,110 +112,110 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
   5. Please note, the ingress is still not secured by any TLS secret. Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV http://myk8sapp-dev.ingress.com/metrics or PROD http://myk8sapp-prod.ingress.com/metrics endpoints, the following metrics will be visible: 
 
 ```bash
-# HELP http_request_duration_seconds Duration of all HTTP requests
-# TYPE http_request_duration_seconds histogram
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.005"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.01"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.025"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.05"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.1"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.25"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.5"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="1"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="2.5"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="5"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="10"} 29
-http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="+Inf"} 29
-http_request_duration_seconds_sum{code="200",handler="found",method="get"} 0.0025533689999999993
-http_request_duration_seconds_count{code="200",handler="found",method="get"} 29
-# HELP http_requests_total Count of all HTTP requests
-# TYPE http_requests_total counter
-http_requests_total{code="200",method="get"} 29
-# HELP version Version information about this binary
-# TYPE version gauge
-version{version="v0.3.0"} 1
-```
+  # HELP http_request_duration_seconds Duration of all HTTP requests
+  # TYPE http_request_duration_seconds histogram
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.005"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.01"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.025"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.05"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.1"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.25"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="0.5"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="1"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="2.5"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="5"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="10"} 29
+  http_request_duration_seconds_bucket{code="200",handler="found",method="get",le="+Inf"} 29
+  http_request_duration_seconds_sum{code="200",handler="found",method="get"} 0.0025533689999999993
+  http_request_duration_seconds_count{code="200",handler="found",method="get"} 29
+  # HELP http_requests_total Count of all HTTP requests
+  # TYPE http_requests_total counter
+  http_requests_total{code="200",method="get"} 29
+  # HELP version Version information about this binary
+  # TYPE version gauge
+  version{version="v0.3.0"} 1
+  ```
  - #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
 
-1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
+   1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
 
-2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of http://prometheus.ingress.com/ and http://prometheus-grafana.ingress.com/ were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
+   2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of http://prometheus.ingress.com/ and http://prometheus-grafana.ingress.com/ were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
 
 - #### Deployment of Prometheus-Exporter for a MongoDB Application to make MongoDB metrics fetched in Prometheus endpoint
 
-Since MongoDB doesn't automatically expose its metrics to Prometheus endpoint, a deployment of Prometheus-exporter for MongoDB is thus necessary to pull its metrics and make these scrapable by Prometheus endpoint.
+  Since MongoDB doesn't automatically expose its metrics to Prometheus endpoint, a deployment of Prometheus-exporter for MongoDB is thus necessary to pull its metrics and make these scrapable by Prometheus endpoint.
 
-1. Following the instructions mentioned in official GitHub documentation of prometheus-exporter of mongodb https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-mongodb-exporter the MongoDB Prometheus was installed. Due to the different MongoDB Service name and label used to make the prometheus-exporter ServiceMonitor discoverable by deployed kube-prometheus stack, during the installation using a custom value file the following values were overridden:
+  1. Following the instructions mentioned in official GitHub documentation of prometheus-exporter of mongodb https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus-mongodb-exporter the MongoDB Prometheus was installed. Due to the different MongoDB Service name and label used to make the prometheus-exporter ServiceMonitor discoverable by deployed kube-prometheus stack, during the installation using a custom value file the following values were overridden:
 
-```yaml 
-mongodb:
-  uri: "mongodb://myk8sappdb-service:27017"
+  ```yaml 
+  mongodb:
+    uri: "mongodb://myk8sappdb-service:27017"
 
-serviceMonitor:
-  enabled: true
-  additionalLabels:
-    release: prometheus
-```
+  serviceMonitor:
+    enabled: true
+    additionalLabels:
+      release: prometheus
+  ```
 
-2. To make the MongoDB Prometheus endpoints accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of http://prometheus-myk8sappdb-exporter.ingress.com was whitelisted in .../etc/hosts configuration. Afterwards the MongoDB ServiceMontor was accessible by calling the http://prometheus.ingress.com/targets endpoint.
+  2. To make the MongoDB Prometheus endpoints accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of http://prometheus-myk8sappdb-exporter.ingress.com was whitelisted in .../etc/hosts configuration. Afterwards the MongoDB ServiceMontor was accessible by calling the http://prometheus.ingress.com/targets endpoint.
 
 - #### Deployment of ArgoCD and Leveraging Continuos Deployment with it
 
-1. Following the official ArgoCD documentation https://argo-cd.readthedocs.io/en/stable/getting_started/ the ArgoCD was installed in ths K8s cluster.
+  1. Following the official ArgoCD documentation https://argo-cd.readthedocs.io/en/stable/getting_started/ the ArgoCD was installed in ths K8s cluster.
 
-2. To make the ArgoCD UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of https://argocd-server.ingress.com/ was whitelisted in .../etc/hosts configuration.
+  2. To make the ArgoCD UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of https://argocd-server.ingress.com/ was whitelisted in .../etc/hosts configuration.
 
 - #### Illustration of following Kubernetes Pod & Container specific tasks:
 
-1. ##### Exemplification of In Place Container's CPU & Memory Resource Adjustment
+  1. ##### Exemplification of In Place Container's CPU & Memory Resource Adjustment
 
-Following the official documentation https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/,  the the feature-gate _InPlacePodVerticalScaling_ must be activated in kube-api server by executing following commands in current docker-desktop provided k8s cluster environment:
+  Following the official documentation https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/,  the the feature-gate _InPlacePodVerticalScaling_ must be activated in kube-api server by executing following commands in current docker-desktop provided k8s cluster environment:
 
-```bash
-docker run -it --privileged --pid=host debian nsenter -t 1 -m -u -n -i sh
-vi /etc/kubernetes/manifests/kube-apiserver.yaml
-```
-After the requisite modification, the added feature-gate can be visible by executing following kubectl command:
+  ```bash
+  docker run -it --privileged --pid=host debian nsenter -t 1 -m -u -n -i sh
+  vi /etc/kubernetes/manifests/kube-apiserver.yaml
+  ```
+  After the requisite modification, the added feature-gate can be visible by executing following kubectl command:
 
-```bash
-kubectl get pod/kube-apiserver-docker-desktop -n kube-system -o yaml
-```
+  ```bash
+  kubectl get pod/kube-apiserver-docker-desktop -n kube-system -o yaml
+  ```
 Wherein the following added feature-gate is worth noticing:
 
-```yaml 
-...
-...
-spec:
-  containers:
-  - command:
-    - kube-apiserver
-    ...
-    ...
-    - --feature-gates=InPlacePodVerticalScaling=true
-```
+  ```yaml 
+  ...
+  ...
+  spec:
+    containers:
+    - command:
+      - kube-apiserver
+      ...
+      ...
+      - --feature-gates=InPlacePodVerticalScaling=true
+  ```
 
 Afterwards, the necessary _resizePolicy_ specification was added in respective deployment manifest _myk8sapp-deployment.yaml_ file as follows:
 
-```yaml
-spec:
-  containers:
-    ...
-    ...               
-    resizePolicy:                                                      
-    - resourceName: memory                                             
-      restartPolicy: NotRequired 
-    - resourceName: cpu
-      restartPolicy: NotRequired 
-```
-2. ##### Exemplification of different Pod QoS
+  ```yaml
+  spec:
+    containers:
+      ...
+      ...               
+      resizePolicy:                                                      
+      - resourceName: memory                                             
+        restartPolicy: NotRequired 
+      - resourceName: cpu
+        restartPolicy: NotRequired 
+  ```
+  2. ##### Exemplification of different Pod QoS
 
-It can be observed from the same above stated command output that the Pod QoS has been designated as _Burstable_ as the _resources.limits_ values are configured higher than the _resources.requests_ values for the deployment _myk8sapp-deployment_ which are fecthed from helm value file at runtime:
+  It can be observed from the same above stated command output that the Pod QoS has been designated as _Burstable_ as the _resources.limits_ values are configured higher than the _resources.requests_ values for the deployment _myk8sapp-deployment_ which are fecthed from helm value file at runtime:
 
-``` yaml
-qosClass: Burstable
-```
-On the contrary, as we didn't pre-define any _resources.limits_ and _resources.requests_ values for deployment _myk8sappdb-deployment_, the Pod QoS in this case has been deemed _BestEffort_ as follows, which can be visible upon execution of above similar kubectl command:
+  ``` yaml
+  qosClass: Burstable
+  ```
+  On the contrary, as we didn't pre-define any _resources.limits_ and _resources.requests_ values for deployment _myk8sappdb-deployment_, the Pod QoS in this case has been deemed _BestEffort_ as follows, which can be visible upon execution of above similar kubectl command:
 
-``` yaml
-qosClass: BestEffort
-```
+  ``` yaml
+  qosClass: BestEffort
+  ```
