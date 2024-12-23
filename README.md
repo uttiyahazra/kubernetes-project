@@ -50,8 +50,8 @@ version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51b
 ##### Deployment of NGINX Ingress Controller and accessing applications through Ingress
 ##### Deployment of Kube-Prometheus Stack and accessing Prometheus metrics & Grafana Visualizations
 ##### Deployment of Prometheus-Exporter for a MongoDB Application 
-##### Deployment of ArgoCD and faciliting Continuos Deployment through it
-##### Illustration of Kubernetes Pod & Container specific tasks:
-###### Exemplification of In Place Container's CPU & Memory Resource Adjustment
-###### Exemplification of different Pod QoS
+##### Deployment of ArgoCD and facilitating Continuos Deployment through it
+##### Illustration of following Kubernetes Pod & Container specific tasks:
+###### In Place Container's CPU & Memory Resource Adjustment
+###### Different Pod QoS in action  
 ... _to be continued _
