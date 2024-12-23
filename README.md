@@ -46,7 +46,7 @@ Server Version: v1.28.2
 $ helm version
 version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51bbc2e345e", GitTreeState:"clean", GoVersion:"go1.20.5"}
 ```
-- ##### Deployment of a staged application with Helm (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#deployment-of-a-staged-application-with-helm)
+- ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#deployment-of-a-staged-application-with-helm)
 - ##### Deployment of NGINX Ingress Controller and Accessing applications through Ingress
 - ##### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
 - ##### Deployment of Prometheus-Exporter for a MongoDB Application to make MongoDB metrics fetched in Prometheus endpoint
