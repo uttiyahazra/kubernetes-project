@@ -88,31 +88,28 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
 - #### Deployment of NGINX Ingress Controller and Accessing applications through Ingress
 
-After the Helm chart deployment of the application, we have made the deployed application accessible from outside of Cluster using NGINX
-Ingress Controller. The below steps are followed:
+  After the Helm chart deployment of the application, we have made the deployed application accessible from outside of Cluster using NGINX Ingress Controller. The below steps are followed:
 
-  - Following the instructions as mentioned in official documentation https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop the nginx-ingress Controller is installed using kubectl manifest files.
+  1. Following the instructions as mentioned in official documentation https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop the nginx-ingress Controller is installed using kubectl manifest files.
 
-  -  The corresponding _spec.ingressClassName: "nginx"_ must be mentioned in respective ingress configuration.
+  2. The corresponding _spec.ingressClassName: "nginx"_ must be mentioned in respective ingress configuration.
 
-  -  The hostname mentioned in section spec.rules.host of ingress configuration, must be whitelisted in _C:\Windows\System32\drivers\etc\hosts_ to bind it to localhost as follows:
+  3. The hostname mentioned in section spec.rules.host of ingress configuration, must be whitelisted in _C:\Windows\System32\drivers\etc\hosts_ to bind it to localhost as follows:
 
-   - ###### Example snippet from ...\etc\hosts file:
-     - ###### To allow the same kube context to work on the host and the container:
+    - ##### Example snippet from ...\etc\hosts file:
+
 ```bash 
 127.0.0.1 kubernetes.docker.internal
 127.0.0.1 myk8sapp-dev.ingress.com
 127.0.0.1 myk8sapp-prod.ingress.com
 ```
 
-  - Afterwards the deployed app (staged) can be accessed invoking requisite URLs, as follows:
+  4. Afterwards the deployed app (staged) can be accessed invoking requisite URLs, as follows:
 
-DEV: http://myk8sapp-dev.ingress.com
-PROD: http://myk8sapp-prod.ingress.com
+    DEV: http://myk8sapp-dev.ingress.com
+    PROD: http://myk8sapp-prod.ingress.com 
 
-Please note, the ingress is still not secured by any TLS secret. 
-
-  - Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV http://myk8sapp-dev.ingress.com/metrics or PROD http://myk8sapp-prod.ingress.com/metrics endpoints, the following metrics will be visible
+  5. Please note, the ingress is still not secured by any TLS secret. Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV http://myk8sapp-dev.ingress.com/metrics or PROD http://myk8sapp-prod.ingress.com/metrics endpoints, the following metrics will be visible: 
 
 ```bash
 # HELP http_request_duration_seconds Duration of all HTTP requests
@@ -138,7 +135,7 @@ http_requests_total{code="200",method="get"} 29
 # TYPE version gauge
 version{version="v0.3.0"} 1
 ```
-- #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
+ - #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
 
 1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
 
