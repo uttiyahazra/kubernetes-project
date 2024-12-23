@@ -1,7 +1,7 @@
 #### A Sample Kubernetes Project with below mentioned requisite illustrations
 - ##### Environment specification
 
-###### Operating System
+-- ###### Operating System
 ```bash
 Windows 11
 ```
