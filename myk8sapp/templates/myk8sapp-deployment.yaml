@@ -26,7 +26,9 @@ spec:
         ports:
         - containerPort:  {{ .Values.app.container1.portnumber }}
         resources:
-          {{ .Values.app.resources | toYaml | nindent 10}}                  # Resources values will be fetched from values file to make the Pod QoS Burstable
+          {{ .Values.app.resources | toYaml | nindent 10}} 
+        featureGates:
+          InPlacePodVerticalScaling: "true"                  # Resources values will be fetched from values file to make the Pod QoS Burstable
         resizePolicy:                                                       #if desired requests or limits for both CPU and memory have changed, the container will not be restarted in order to resize its memory.
         - resourceName: memory
           restartPolicy: NotRequired 
