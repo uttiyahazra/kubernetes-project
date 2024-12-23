@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 app:
-  replicanumber: 1
+  replicanumber: 3
   initcontainer:
     name: httpd
     portnumber: 80

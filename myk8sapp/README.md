@@ -168,3 +168,56 @@ serviceMonitor:
 1. Following the official ArgoCD documentation https://argo-cd.readthedocs.io/en/stable/getting_started/ the ArgoCD was installed in ths K8s cluster.
 
 2. To make the ArgoCD UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of https://argocd-server.ingress.com/ was whitelisted in .../etc/hosts configuration.
+
+#### Illustration of Kubernetes Pod & Container specific tasks
+##### Exemplification of In Place Container's CPU & Memory Resource Adjustment
+
+Following the official documentation https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/,  the the feature-gate _InPlacePodVerticalScaling_ must be activated in kube-api server by executing following commands in current docker-desktop provided k8s cluster environment:
+
+```bash
+docker run -it --privileged --pid=host debian nsenter -t 1 -m -u -n -i sh
+vi /etc/kubernetes/manifests/kube-apiserver.yaml
+```
+After the requisite modification, the added feature-gate can be visible by executing following kubectl command:
+
+```bash
+kubectl get pod/kube-apiserver-docker-desktop -n kube-system -o yaml
+```
+Wherein the following added feature-gate is worth noticing:
+
+```yaml 
+...
+...
+spec:
+  containers:
+  - command:
+    - kube-apiserver
+    ...
+    ...
+    - --feature-gates=InPlacePodVerticalScaling=true
+```
+
+Afterwards, the necessarz resizePolicy was added in respective deployment manifest _myk8sapp-deployment.yaml_ file as follows:
+
+```yaml
+      containers:
+        ...
+        ...               
+        resizePolicy:                                                      
+        - resourceName: memory                                             
+          restartPolicy: NotRequired 
+        - resourceName: cpu
+          restartPolicy: NotRequired 
+```
+##### Exemplification of different Pod QoS
+
+It can be observed from the same above stated command output that the Pod QoS has been designated as _Burstable_ as the _resources.limits_ values are configured higher than the _resources.requests_ values for the deployment _myk8sapp-deployment_ which are fecthed from helm value file at runtime:
+
+``` yaml
+qosClass: Burstable
+```
+On the contrary, as we didn't pre-define any _resources.limits_ and _resources.requests_ values for deployment _myk8sappdb-deployment_, the Pod QoS in this case has been deemed _BestEffort_ as follows, which can be visible upon execution of above similar kubectl command:
+
+``` yaml
+qosClass: BestEffort
+```

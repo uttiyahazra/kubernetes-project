@@ -11,6 +11,12 @@ spec:
   selector:
     matchLabels:
       app:  {{ .Values.app.name }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1 # maxSure as an absolute number of replicas
+      maxUnavailable: 33% #  maxUnavailable as % of replicas
+    type: RollingUpdate
+  minReadySeconds: 5 # Using minReadySeconds to add a readiness buffer.
   template:
     metadata:
       labels:
@@ -27,8 +33,8 @@ spec:
         - containerPort:  {{ .Values.app.container1.portnumber }}
         resources:
           {{ .Values.app.resources | toYaml | nindent 10}}                 # Resources values will be fetched from values file to make the Pod QoS Burstable
-        resizePolicy:                                                       #if desired requests or limits for both CPU and memory have changed, the container will not be restarted in order to resize its memory.
-        - resourceName: memory
+        resizePolicy:                                                      # if desired requests or limits for both CPU and memory have changed, the container will not be restarted in order to resize its memory.
+        - resourceName: memory                                             # Please note, for activation of this resizePolicy, the feature-gate InPlacePodVerticalScaling must remain enabled in kube-api server
           restartPolicy: NotRequired 
         - resourceName: cpu
           restartPolicy: NotRequired 
