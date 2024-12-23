@@ -1,5 +1,5 @@
 #### A Sample Kubernetes Project with below mentioned requisite illustrations
-##### Environment specification
+- ##### Environment specification
 
 ###### Operating System
 ```bash
