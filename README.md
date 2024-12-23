@@ -1,4 +1,4 @@
-#### A Sample Kubernetes Project with below mentioned requisite illustrations
+#### A Sample Kubernetes Project With Useful Illustrations
 - ##### Environment specification
 
 ###### Operating System
@@ -46,12 +46,12 @@ Server Version: v1.28.2
 $ helm version
 version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51bbc2e345e", GitTreeState:"clean", GoVersion:"go1.20.5"}
 ```
-- ##### Deployment of a staged application with Helm
-- ##### Deployment of NGINX Ingress Controller and Accessing applications through Ingress
-- ##### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
-- ##### Deployment of Prometheus-Exporter for a MongoDB Application to make MongoDB metrics fetched in Prometheus endpoint
-- ##### Deployment of ArgoCD and Leveraging Continuos Deployment with it
-- ##### Illustration of following Kubernetes Pod & Container specific tasks:
-  1. ###### In Place Container's CPU & Memory Resource Adjustment
-  2. ###### Different Pod QoS in action  
+- ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#deployment-of-a-staged-application-with-helm)
+- ##### [Deployment of NGINX Ingress Controller and Accessing applications through Ingress] (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#deployment-of-nginx-ingress-controller-and-accessing-applications-through-ingress)
+- ##### [Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations] (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#deployment-of-kube-prometheus-stack-and-accessing-prometheus-metrics--grafana-visualizations)
+- ##### [Deployment of Prometheus-Exporter for a MongoDB Application to make MongoDB metrics fetched in Prometheus endpoint] (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#deployment-of-prometheus-exporter-for-a-mongodb-application-to-make-mongodb-metrics-fetched-in-prometheus-endpoint)
+- ##### [Deployment of ArgoCD and Leveraging Continuos Deployment with it] (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#deployment-of-argocd-and-leveraging-continuos-deployment-with-it)
+- ##### [Illustration of following Kubernetes Pod & Container specific tasks:] (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#illustration-of-following-kubernetes-pod--container-specific-tasks)
+  1. ###### [In Place Container's CPU & Memory Resource Adjustment] (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#exemplification-of-in-place-containers-cpu--memory-resource-adjustment)
+  2. ###### [Different Pod QoS in action] (https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/README.md#exemplification-of-different-pod-qos)
 ... _to be continued _
