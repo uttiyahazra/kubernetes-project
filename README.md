@@ -1,7 +1,7 @@
 #### A Sample Kubernetes Project with below mentioned requisite illustrations
 - ##### Environment specification
 
--- ###### Operating System
+###### Operating System
 ```bash
 Windows 11
 ```
@@ -41,17 +41,17 @@ Client Version: v1.30.5
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 Server Version: v1.28.2
 ```
-###### Helm Vesrion
+###### Helm Version
 ```bash
 $ helm version
 version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51bbc2e345e", GitTreeState:"clean", GoVersion:"go1.20.5"}
 ```
-##### Deployment of a staged application with Helm
-##### Deployment of NGINX Ingress Controller and accessing applications through Ingress
-##### Deployment of Kube-Prometheus Stack and accessing Prometheus metrics & Grafana Visualizations
-##### Deployment of Prometheus-Exporter for a MongoDB Application 
-##### Deployment of ArgoCD and facilitating Continuos Deployment through it
-##### Illustration of following Kubernetes Pod & Container specific tasks:
-###### In Place Container's CPU & Memory Resource Adjustment
-###### Different Pod QoS in action  
+- ##### Deployment of a staged application with Helm
+- ##### Deployment of NGINX Ingress Controller and Accessing applications through Ingress
+- ##### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
+- ##### Deployment of Prometheus-Exporter for a MongoDB Application 
+- ##### Deployment of ArgoCD and Leveraging Continuos Deployment through it
+- ##### Illustration of following Kubernetes Pod & Container specific tasks:
+  1. ###### In Place Container's CPU & Memory Resource Adjustment
+  2. ###### Different Pod QoS in action  
 ... _to be continued _
