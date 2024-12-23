@@ -49,8 +49,8 @@ version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51b
 - ##### Deployment of a staged application with Helm
 - ##### Deployment of NGINX Ingress Controller and Accessing applications through Ingress
 - ##### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
-- ##### Deployment of Prometheus-Exporter for a MongoDB Application 
-- ##### Deployment of ArgoCD and Leveraging Continuos Deployment through it
+- ##### Deployment of Prometheus-Exporter for a MongoDB Application to make MongoDB metrics fetched in Prometheus endpoint
+- ##### Deployment of ArgoCD and Leveraging Continuos Deployment with it
 - ##### Illustration of following Kubernetes Pod & Container specific tasks:
   1. ###### In Place Container's CPU & Memory Resource Adjustment
   2. ###### Different Pod QoS in action  
