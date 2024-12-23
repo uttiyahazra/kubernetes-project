@@ -23,9 +23,6 @@ spec:
       containers:
       - name:  {{ .Values.app.container1.name }}-main-container
         image: "{{ .Values.app.container1.image}}:{{ .Values.app.container1.tag}}"
-        command: 
-        - kube-apiserver
-        - --feature-gates=InPlacePodVerticalScaling=true
         ports:
         - containerPort:  {{ .Values.app.container1.portnumber }}
         resources:
