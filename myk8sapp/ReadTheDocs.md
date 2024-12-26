@@ -108,8 +108,9 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
     DEV: http://myk8sapp-dev.ingress.com
     PROD: http://myk8sapp-prod.ingress.com 
+  
 
-  5. Please note, the ingress is still not secured by any TLS secret. Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV http://myk8sapp-dev.ingress.com/metrics or PROD http://myk8sapp-prod.ingress.com/metrics endpoints, the following metrics will be visible: 
+  5.  Since this is a Prometheus example exposing some basic Prometheus scrapable metrics by default, by invoking the DEV http://myk8sapp-dev.ingress.com/metrics or PROD http://myk8sapp-prod.ingress.com/metrics endpoints, the following metrics will be visible: 
 
     ```bash
     # HELP http_request_duration_seconds Duration of all HTTP requests
@@ -135,7 +136,42 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
     # TYPE version gauge
     version{version="v0.3.0"} 1
     ```
- - #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
+
+- #### Installation of cert-manager and generation of self-signed certificate for TLS Termination
+
+   1. Following to the official documentation regarding installation in k8s https://cert-manager.io/docs/installation/kubectl/, the cert-manager resources (CRDs & other components) was installed using static installation way using k8s manifest files. 
+
+   2. After the installation, the cluster wide resource ClusterIssuer manifest _myk8sapp-selfsigned-clusterissuer.yaml_ (part of Helm Chart) was deployed as we want to be able to request certificates from any namespace in a cluster. Upon deployment of it, the same can be verified by executing below kubectl command:
+
+   ```bash 
+   kubectl get clusterissuers myk8sapp-dev-selfsigned-cluster-issuer
+   ```
+   In the output, the ClusterIssuer CR status should show _READY_ as TRUE.
+
+   3. In the designated namespace where the myk8sapp is installed, the self-signed certificate issued by the cluster-issuer (part of Helm Chart) was deployed  which should be used for TLS Termination & expose the application endpoint over HTTPS.
+
+   4. Afterwards, the following annotations & TLS Certificate configuration was updated in ingress configuration:
+
+   ```yaml
+   ....
+   ....
+     annotations:
+       cert-manager.io/clusterissuer: "{{ .Values.app.name }}-selfsigned-cluster-issuer" #annotation reference of cluster-issuer
+       ingress.kubernetes.io/ssl-redirect: "true" #annotation for redirection over HTTPS
+   ....
+   ....
+     tls:
+     - hosts: 
+       - {{ .Values.app.name }}.ingress.com
+       secretName: {{ .Values.app.name }}-tls-key-pair
+   ```
+   5. After the above configuration adjustments, the endpoint https://myk8sapp-dev.ingress.com can be accessed in web-browser where it will be rediected over HTTPS with the known warning message _'Your connection is not private'_ where the _Not Secure_ option can be clicked and the certificate can be visualized before proceeding to access the app:
+
+   ![alt text](image.png)
+
+    As visible, in this case the CN _ingress.com_ has been used in self-signed certificate.
+
+- #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
 
    1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
 
