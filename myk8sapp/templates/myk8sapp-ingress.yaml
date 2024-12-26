@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/clusterissuer: "myk8sapp-selfsigned-cluster-issuer"
+    cert-manager.io/clusterissuer: "{{ .Values.app.name }}-selfsigned-cluster-issuer"
     ingress.kubernetes.io/ssl-redirect: "true"
   name: {{ .Values.app.name }}-ingress
 spec:
@@ -21,4 +21,4 @@ spec:
   tls:
   - hosts: 
     - {{ .Values.app.name }}.ingress.com
-    secretName: myk8sapp-tls-key-pair
+    secretName: {{ .Values.app.name }}-tls-key-pair

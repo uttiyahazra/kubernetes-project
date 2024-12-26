@@ -1,6 +1,6 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: myk8sapp-selfsigned-cluster-issuer
+  name: {{ .Values.app.name }}-selfsigned-cluster-issuer
 spec:
   selfSigned: {}
