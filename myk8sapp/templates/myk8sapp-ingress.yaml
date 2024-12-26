@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/cluster-issuer: myk8sapp-selfsigned-cluster-issuer
+    cert-manager.io/issuer: "letsencrypt-staging"
   name: {{ .Values.app.name }}-ingress
 spec:
   ingressClassName: "nginx"
@@ -20,4 +20,4 @@ spec:
   tls:
   - hosts: 
     - {{ .Values.app.name }}.ingress.com
-    secretName: myk8sapp-secret
+    secretName: letsencrypt-staging
