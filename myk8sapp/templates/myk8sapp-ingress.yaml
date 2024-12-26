@@ -20,4 +20,4 @@ spec:
   tls:
   - hosts: 
     - {{ .Values.app.name }}.ingress.com
-    secretName: letsencrypt-staging
+    secretName: letsencrypt-staging-gn5lp
