@@ -1,6 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: myk8sapp-selfsigned-cluster-issuer
   name: {{ .Values.app.name }}-ingress
 spec:
   ingressClassName: "nginx"
@@ -14,4 +16,8 @@ spec:
           service:
             name: {{ .Values.app.name }}-service
             port: 
-              number: {{ .Values.app.container1.portnumber }}
+              number: {{ .Values.app.service.portnumber }}
+  tls:
+  - hosts: 
+    - {{ .Values.app.name }}.ingress.com
+    secretName: myk8sapp-secret

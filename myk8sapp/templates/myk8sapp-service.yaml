@@ -6,7 +6,7 @@ spec:
   selector:
     app: {{ .Values.app.name }}
   ports:
-  - name: http
+  - name: https
     protocol: TCP
     port: {{ .Values.app.service.portnumber }}
     targetPort: {{ .Values.app.container1.portnumber }}

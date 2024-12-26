@@ -24,7 +24,7 @@ app:
     image: fluentd
     tag: latest
   service:
-    portnumber: 80
+    portnumber: 8443
   resources:
     limits:
       memory: 320Mi
