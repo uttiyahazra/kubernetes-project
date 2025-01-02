@@ -18,7 +18,7 @@ app:
       initialDelayseconds: 10
       successThreshold: 1
       failureThreshold: 1
-  container2:
+  nativesidecar:
     name: fluentd
     portnumber: 8082
     image: fluentd
