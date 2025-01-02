@@ -26,6 +26,19 @@ spec:
       - name: {{ .Values.app.initcontainer.name }}-init-container
         image: "{{ .Values.app.initcontainer.image}}:{{ .Values.app.initcontainer.tag}}"
         command: ["sleep", "5"]
+      - name: {{ .Values.app.nativesidecar.name }}-native-sidecar-container                #illustration of k8s native-sidecar container
+        image: "{{ .Values.app.nativesidecar.image}}:{{ .Values.app.nativesidecar.tag}}"
+        ports:
+        - containerPort:  {{ .Values.app.nativesidecar.portnumber }}
+        restartPolicy: Always                                                              
+        startupProbe:
+          exec:
+            command:
+            - cat 
+            - /fluentd/etc/fluent.conf
+      failureThreshold: 30
+      periodSeconds: 10
+      successThreshold: 2
       containers:
       - name:  {{ .Values.app.container1.name }}-main-container
         image: "{{ .Values.app.container1.image}}:{{ .Values.app.container1.tag}}"
@@ -57,12 +70,6 @@ spec:
         volumeMounts: 
           - mountPath: /mnt 
             name: {{ .Values.app.name }}-host-path-volume
-      - name: {{ .Values.app.container2.name }}-sidecar-container
-        image: "{{ .Values.app.container2.image}}:{{ .Values.app.container2.tag}}"
-        ports:
-        - containerPort:  {{ .Values.app.container2.portnumber }}
-        resources:                                                                              # Resources values will be fetched from values file to make the Pod QoS Burstable
-          {{ .Values.app.resources | toYaml | nindent 10}}
       volumes:
         - name: {{ .Values.app.name }}-host-path-volume
           hostPath: 
