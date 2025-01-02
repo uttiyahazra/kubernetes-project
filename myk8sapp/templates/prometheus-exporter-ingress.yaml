@@ -2,6 +2,6 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: prometheus-myk8sappdb-exporter-ingress
-  namespace: default  #must be the same namespace where kube-prometheus stack is installed
+  namespace: prometheus  #must be the same namespace where kube-prometheus stack is installed
 spec:
   {{ .Values.prometheusExporterIngressSpec | toYaml | nindent 2}}
