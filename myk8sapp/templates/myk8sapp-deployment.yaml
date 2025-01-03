@@ -23,15 +23,15 @@ spec:
         app:  {{ .Values.app.name }}
     spec:
       initContainers:
-      - name: {{ .Values.app.initcontainer.name }}-init-container
-        image: "{{ .Values.app.initcontainer.image}}:{{ .Values.app.initcontainer.tag}}"
+      - name: httpd-init-container
+        image: httpd:latest
         command: ["sleep", "5"]
-      - name: {{ .Values.app.nativesidecar.name }}-native-sidecar-container                #illustration of k8s native-sidecar container
-        image: "{{ .Values.app.nativesidecar.image}}:{{ .Values.app.nativesidecar.tag}}"
+      - name: fluentd-native-sidecar-container                #illustration of k8s native-sidecar container
+        image: fluentd-latest
         ports:
-        - containerPort:  {{ .Values.app.nativesidecar.portnumber }}
-        restartPolicy: Always                                                              
-        startupProbe:
+        - containerPort:  8082
+        restartPolicy: Always                                 # To ensure the native sidecar starts before later containers are started                                            
+        startupProbe:                                         # To ensure the init (native sidecar) Container is ready as main container won't start unless init container is up
           exec:
             command:
             - cat 
