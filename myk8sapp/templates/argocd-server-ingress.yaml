@@ -2,8 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    cert-manager.io/clusterissuer: "{{ .Values.app.name }}-selfsigned-cluster-issuer"   #annotation reference of cluster-issuer
     ingress.kubernetes.io/ssl-redirect: "true"    #annotation for redirection over HTTPS
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
   name: argocd-server-ingress
   namespace: argocd  #must be the same namespace where argocd is installed
 spec:
