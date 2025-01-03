@@ -258,24 +258,42 @@ Afterwards, the necessary _resizePolicy_ specification was added in respective d
   3. ##### Illustration of native SideCar container
 
   Following the official K8s documentation https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/, the _fluentd_ Container has been added as native sidecar container with respective _startupProbe_ and _restartPolicy: Always_ . Converse to the mentioned official documentation, since we are using k8s version 1.30, the respective _feature gate_ was not required to be explicitly enabled, as in this version native sidecar is a GA (stable) feature which is implicitly enabled.
+
+  An execution of above mentioned _helm template_ command thus will produce following output:
+
+
   
-   ``` yaml
-      spec:
+   ``` bash
+$ helm template ./myk8sapp --debug
+---
+# Source: myk8sapp/templates/myk8sapp-deployment.yaml
+# In this Deployment YAML Manifest, common configuration tasks for Pods & Containers will be illustrated.
+#Source documentation: https://kubernetes.io/docs/tasks/configure-pod-container/
+
+
+apiVersion: apps/v1
+kind: Deployment
+...
+...
+    spec:
       initContainers:
-      - name: {{ .Values.app.initcontainer.name }}-init-container
-        image: "{{ .Values.app.initcontainer.image}}:{{ .Values.app.initcontainer.tag}}"
+      - name: httpd-init-container
+        image: httpd:latest
         command: ["sleep", "5"]
-      - name: {{ .Values.app.nativesidecar.name }}-native-sidecar-container                #illustration of k8s native-sidecar container
-        image: "{{ .Values.app.nativesidecar.image}}:{{ .Values.app.nativesidecar.tag}}"
+      - name: fluentd-native-sidecar-container                #illustration of k8s native-sidecar container
+        image: fluentd-latest
         ports:
-        - containerPort:  {{ .Values.app.nativesidecar.portnumber }}
-        restartPolicy: Always          # To ensure the native sidecar container starts before later main container                                                     
-        startupProbe:                # To ensure the init (native sidecar) Container is ready as main container won't start unless init container is up                                                      
+        - containerPort:  8082
+        restartPolicy: Always                                 # To ensure the native sidecar starts before later containers are started                       
+        startupProbe:                                         # To ensure the init (native sidecar) Container is ready as main container won't start unless init container is up
           exec:
             command:
-            - cat 
+            - cat
             - /fluentd/etc/fluent.conf
       failureThreshold: 30
       periodSeconds: 10
       successThreshold: 2
+...
+...
+---
      ```
