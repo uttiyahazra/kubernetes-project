@@ -39,7 +39,7 @@ Server: Docker Desktop 4.37.1 (178610)
 $ kubectl version
 Client Version: v1.30.5
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
-Server Version: v1.28.2
+Server Version: v1.30.5
 ```
 ###### Helm Version
 ```bash
