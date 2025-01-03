@@ -3,9 +3,5 @@ kind: Ingress
 metadata:
   name: argocd-server-ingress
   namespace: argocd  #must be the same namespace where argocd is installed
-  annotations:
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
-    alb.ingress.kubernetes.io/ssl-passthrough: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   {{ .Values.argocdServerIngressSpec | toYaml | nindent 2 }}

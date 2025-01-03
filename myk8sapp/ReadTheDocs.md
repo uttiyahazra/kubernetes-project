@@ -261,8 +261,6 @@ Afterwards, the necessary _resizePolicy_ specification was added in respective d
 
   An execution of above mentioned _helm template_ command thus will produce following output:
 
-
-  
    ``` bash
 $ helm template ./myk8sapp --debug
 ---
