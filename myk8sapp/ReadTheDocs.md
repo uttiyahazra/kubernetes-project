@@ -255,3 +255,27 @@ Afterwards, the necessary _resizePolicy_ specification was added in respective d
   ``` yaml
   qosClass: BestEffort
   ```
+  3. ##### Illustration of native SideCar container
+
+  Following the official K8s documentation https://kubernetes.io/blog/2023/08/25/native-sidecar-containers/, the _fluentd_ Container has been added as native sidecar container with respective _startupProbe_ and _restartPolicy: Always_ . Converse to the mentioned official documentation, since we are using k8s version 1.30, the respective _feature gate_ was not required to be explicitly enabled, as in this version native sidecar is a GA (stable) feature which is implicitly enabled.
+  
+   ``` yaml
+      spec:
+      initContainers:
+      - name: {{ .Values.app.initcontainer.name }}-init-container
+        image: "{{ .Values.app.initcontainer.image}}:{{ .Values.app.initcontainer.tag}}"
+        command: ["sleep", "5"]
+      - name: {{ .Values.app.nativesidecar.name }}-native-sidecar-container                #illustration of k8s native-sidecar container
+        image: "{{ .Values.app.nativesidecar.image}}:{{ .Values.app.nativesidecar.tag}}"
+        ports:
+        - containerPort:  {{ .Values.app.nativesidecar.portnumber }}
+        restartPolicy: Always          # To ensure the native sidecar container starts before later main container                                                     
+        startupProbe:                # To ensure the init (native sidecar) Container is ready as main container won't start unless init container is up                                                      
+          exec:
+            command:
+            - cat 
+            - /fluentd/etc/fluent.conf
+      failureThreshold: 30
+      periodSeconds: 10
+      successThreshold: 2
+     ```
