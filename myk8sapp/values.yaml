@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 app:
+  name: myk8sapp
   replicanumber: 3
   initcontainer:
     name: httpd
