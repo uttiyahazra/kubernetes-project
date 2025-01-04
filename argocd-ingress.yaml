@@ -7,4 +7,15 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd  #must be the same namespace where argocd is installed
 spec:
-  {{ .Values.argocdServerIngressSpec | toYaml | nindent 2 }}
+  ingressClassName: "nginx"
+  rules:
+  - host: argocd-server.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 443
