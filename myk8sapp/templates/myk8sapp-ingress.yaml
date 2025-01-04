@@ -15,7 +15,3 @@ spec:
             name: {{ .Values.app.name }}-service
             port: 
               number: {{ .Values.app.service.portnumber }}
-  tls:
-  - hosts: 
-    - {{ .Values.app.name }}.ingress.com
-    secretName: {{ .Values.app.name }}-tls-key-pair
