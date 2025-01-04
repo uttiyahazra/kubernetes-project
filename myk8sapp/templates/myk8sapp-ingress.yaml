@@ -1,10 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.app.name }}-ingress
   annotations:
     cert-manager.io/clusterissuer: "{{ .Values.app.name }}-selfsigned-cluster-issuer"   #annotation reference of cluster-issuer
     ingress.kubernetes.io/ssl-redirect: "true"    #annotation for redirection over HTTPS
+  name: {{ .Values.app.name }}-ingress
 spec:
   ingressClassName: "nginx"
   rules:
@@ -18,7 +18,7 @@ spec:
             name: {{ .Values.app.name }}-service
             port: 
               number: {{ .Values.app.service.portnumber }}
-    tls:
-      - hosts: 
-        - {{ .Values.app.name }}.ingress.com
-        secretName: {{ .Values.app.name }}-tls-key-pair
+  tls:
+  - hosts: 
+    - {{ .Values.app.name }}.ingress.com
+    secretName: {{ .Values.app.name }}-tls-key-pair
