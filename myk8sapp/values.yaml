@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-app:
+app: 
   name: myk8sapp
   replicanumber: 3
   initcontainer:
@@ -38,6 +38,7 @@ app:
       env: "stage specific dynamically overridden from respective value file"
 
 db:
+  name: myk8sappdb
   replicanumber: 1
   container1:
     image: mongo
