@@ -36,9 +36,9 @@ spec:
             command:
             - cat 
             - /fluentd/etc/fluent.conf
-      failureThreshold: 30
-      periodSeconds: 10
-      successThreshold: 2
+          failureThreshold: 30
+          periodSeconds: 10
+          successThreshold: 2
       containers:
       - name:  {{ .Values.app.container1.name }}-main-container
         image: "{{ .Values.app.container1.image}}:{{ .Values.app.container1.tag}}"
@@ -62,7 +62,7 @@ spec:
             command:
             - cat
             - /etc/resolv.conf
-          initialDelayseconds: {{ .Values.app.container1.readinessprobe.initialDelayseconds }}
+          initialDelayseconds: 10
           periodSeconds: 5
           timeoutSeconds: 5
           successThreshold: {{ .Values.app.container1.readinessprobe.successThreshold }}
