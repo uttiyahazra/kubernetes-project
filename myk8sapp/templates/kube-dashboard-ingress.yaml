@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kube-dashboard-ingress
+  namespace: kube-dashboard  #must be the same namespace where kube-dashboard is installed
+spec:
+  ingressClassName: "nginx"
+  rules:
+  - host: kube-dashboard.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kubernetes-dashboard-kong-proxy
+            port: 
+              number: 443
