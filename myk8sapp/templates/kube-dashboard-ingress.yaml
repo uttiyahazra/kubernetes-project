@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   name: kube-dashboard-ingress
   namespace: kube-dashboard  #must be the same namespace where kube-dashboard is installed
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    alb.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   ingressClassName: "nginx"
   rules:
