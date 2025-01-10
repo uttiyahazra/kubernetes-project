@@ -4,7 +4,7 @@
 
 app: 
   name: myk8sapp
-  replicanumber: 3
+  replicanumber: 1
   initcontainer:
     name: httpd
     portnumber: 80
