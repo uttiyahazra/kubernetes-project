@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mongo-client
+  name: mongo-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-client
+  template:
+    metadata:
+      labels:
+        app: mongo-client
+    spec:
+      containers:
+      - image: mongo
+        name: mongo-client
+        env:                                      # This is only for illustration purpose. The preservation &  Injection of secrets must be done through a Secretmanagement solution
+        - name: mongo-client_INITDB_ROOT_USERNAME
+          value: 'mongodb-client-username'
+        - name: mongo-client_INITDB_ROOT_PASSWORD
+          value: 'mongodb-client-password'
