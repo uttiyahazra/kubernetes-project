@@ -136,6 +136,24 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
     # TYPE version gauge
     version{version="v0.3.0"} 1
     ```
+- #### Deployment and Accessing Kubernetes-Dashboard
+   
+   1. For various reasons it might be necessary to access the Kubernetes Cluster through a dashboard for a holistic overview of the cluster. Following the official documentation https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/, the Kubernetes Dashboard was installed.
+
+   2. To make the Kubernetes Dashbaord UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above stated way the host _kube-dashboard.ingress.com_ was whitelisted in _.../etc/hosts_ configuration. Afterwards the Dashboard UI https://kube-dashboard.ingress.com/ was accessible over web-browser.
+   
+   3. We chose to use the _Token_ option for login to dashboard. For which the following steps are necessary:
+      a. Create an admin-user service account and cluster role binding:
+      ```bash
+      kubectl create serviceaccount admin-user -n kubernetes-dashboard
+
+      kubectl create clusterrolebinding admin-user-binding -n kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kubernetes-dashboard:admin-user
+      ```
+      b. Generate the token using the following command:
+      ```bash
+      kubectl -n kubernetes-dashboard create token admin-user
+      ```
+      Afterwards the generated token was used for login.
 
 - #### Installation of cert-manager and generation of self-signed certificate for TLS Termination
 
@@ -175,7 +193,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
    1. Following the instructions mentioned in official GitHub documentation of kube-promethus-stack https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack the kube-prometheus-stack was installed.
 
-   2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the access-URLS of http://prometheus.ingress.com/ and http://prometheus-grafana.ingress.com/ were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
+   2. To make the Prometheus & Grafana endpoints accessible over deployed NGINX ingress, the respective ingress configurations (part of Helm chart) were added and similar to above mentoned way the Ingress hosts were whitelisted in .../etc/hosts configuration. Afterwards the Prometheus and Grafana were accessible accordingly.
 
 - #### Deployment of Prometheus-Exporter for a MongoDB Application to make MongoDB metrics fetched in Prometheus endpoint
 
@@ -199,7 +217,13 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
   1. Following the official ArgoCD documentation https://argo-cd.readthedocs.io/en/stable/getting_started/ the ArgoCD was installed in ths K8s cluster.
 
-  2. To make the ArgoCD UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the access-URLS of https://argocd-server.ingress.com/ was whitelisted in .../etc/hosts configuration.
+  2. To make the ArgoCD UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above mentoned way the host argocd-server.ingress.com was whitelisted in .../etc/hosts configuration.
+
+  3. In order to login to ArgoCD UI, the initial admin password can be retrieved by following command execution:
+
+  ```bash
+  kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" -n argocd| base64 -d
+  ```
 
 - #### Illustration of following Kubernetes Pod & Container specific tasks:
 
