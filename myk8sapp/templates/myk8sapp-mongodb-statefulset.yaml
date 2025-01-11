@@ -1,15 +1,15 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app: mongo
   name: mongo
 spec:
+  serviceName: "mongo"
   replicas: 1
   selector:
     matchLabels:
       app: mongo
-  strategy: {}
   template:
     metadata:
       labels:
@@ -53,9 +53,13 @@ spec:
               name: mongo-creds
               key: password
         volumeMounts:
-        - name: "mongo-data-dir"
+        - name: mongo-data
           mountPath: "/data/db"
-      volumes:
-      - name: "mongo-data-dir"
-        persistentVolumeClaim:
-          claimName: "mongo-data-pvc"
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 1Gi
