@@ -5,7 +5,7 @@ metadata:
     app: mongo
   name: mongo
 spec:
-  serviceName: "mongo"
+  serviceName: "myk8sapp-mongodb-service"
   replicas: 1
   selector:
     matchLabels:
