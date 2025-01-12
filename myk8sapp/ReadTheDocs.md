@@ -136,6 +136,61 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
     # TYPE version gauge
     version{version="v0.3.0"} 1
     ```
+
+- #### Deployment of MongoDB Statefulset and accessing MongoDB
+   
+   The MongoDB Statefulset has been deployed along with the Mongo client and allied headless service (in order to render the backend Pod identity without the proxy abstraction). After the deployment is performed, the respective _mongo-client_ pod
+   can be _exec_ed to access the mongo shell and perform some basic MongoDB operations:
+
+   Snippet from Headless Service:
+
+     ```yaml
+     spec:
+       ports:
+         - port: 27017
+           targetPort: 27017
+       clusterIP: None
+     ```
+
+    ```bash
+    kubectl exec -it pod/mongo-client-6ff794fb4c-pvkp9 -n dev -- bash
+    root@mongo-client-6ff794fb4c-pvkp9:/# mongosh --host myk8sapp-mongodb-service --port 27017 -u mongodb-username -p mongodb-password
+    Current Mongosh Log ID: 6784159db9d1062e09e94969
+    Connecting to:          mongodb://<credentials>@myk8sapp-mongodb-service:27017/?directConnection=true&appName=mongosh+2.3.4
+    Using MongoDB:          8.0.4
+    Using Mongosh:          2.3.4
+
+    For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+    To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
+    You can opt-out by running the disableTelemetry() command.
+
+    ------
+    The server generated these startup warnings when booting
+    2025-01-12T18:58:03.907+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+    2025-01-12T18:58:07.126+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
+    2025-01-12T18:58:07.126+00:00: We suggest setting the contents of sysfsFile to 0.
+    2025-01-12T18:58:07.126+00:00: Your system has glibc support for rseq built in, which is not yet supported by tcmalloc-google and has critical performance implications. Please set the environment variable GLIBC_TUNABLES=glibc.pthread.rseq=0
+    2025-01-12T18:58:07.126+00:00: vm.max_map_count is too low
+    2025-01-12T18:58:07.126+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
+    ------
+
+    test> show dbs
+    admin   100.00 KiB
+    config   12.00 KiB
+    local    72.00 KiB
+   
+    test> use testdb
+    switched to db testdb
+    testdb> show collections
+    testdb> db.collection.insertOne({  month: "january",  field2: "2025"})
+    {
+      acknowledged: true,
+      insertedId: ObjectId('67841715c8fc9e7de9e9496a')
+    }
+
+    ```
+   
 - #### Deployment and Accessing Kubernetes-Dashboard
    
    1. For various reasons it might be necessary to access the Kubernetes Cluster through a dashboard for a holistic overview of the cluster. Following the official documentation https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/, the Kubernetes Dashboard was installed.
