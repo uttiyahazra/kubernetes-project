@@ -46,7 +46,7 @@ Server Version: v1.30.5
 $ helm version
 version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51bbc2e345e", GitTreeState:"clean", GoVersion:"go1.20.5"}
 ```
-- ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-a-staged-application-with-helm) 
+- ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md) 
 - ##### [Deployment of NGINX Ingress Controller and Accessing applications through Ingress](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-nginx-ingress-controller-and-accessing-applications-through-ingress)
 - ##### [Installation of Cert-Manager and Generation of Self signed certificate for TLS termination](https://github.com/uttiyahazra/uttiyahazra.github.io/blob/master/myk8sapp/ReadTheDocs.md#installation-of-cert-manager-and-generation-of-self-signed-certificate-for-tls-termination)
 - ##### [Deployment and Access of Kubernetes Dashboard](https://github.com/uttiyahazra/kubernetes-project/blob/develop/myk8sapp/ReadTheDocs.md#deployment-and-accessing-kubernetes-dashboard)
