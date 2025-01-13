@@ -140,7 +140,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 - #### Deployment of MongoDB Statefulset and accessing MongoDB
    
    The MongoDB Statefulset has been deployed along with the Mongo client and allied headless service (in order to render the backend Pod identity without the proxy abstraction). After the deployment is performed, the respective _mongo-client_ pod
-   can be _exec_ed to access the mongo shell and perform some basic MongoDB operations:
+   can be _exec_ ed to access the mongo shell and perform some basic MongoDB operations:
 
    Snippet from Headless Service:
 
