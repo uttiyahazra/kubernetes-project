@@ -279,6 +279,38 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
   ```bash
   kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" -n argocd| base64 -d
   ```
+- #### Illustration of Stakater Reloader
+
+  1. Following the instructions mentioned in Stakater Reloader official GitHub repository https://github.com/stakater/Reloader, it was deployed using [helm charts](https://github.com/stakater/Reloader?tab=readme-ov-file#helm-charts).
+  
+  After the deployment, the reloader log excerpts as following can be observed which illustrates the respective ConfigMap and Secrets are started to be watched:
+
+  ```bash
+  2025-01-13 21:57:06 time="2025-01-13T20:57:06Z" level=info msg="Environment: Kubernetes"
+  2025-01-13 21:57:06 time="2025-01-13T20:57:06Z" level=info msg="Starting Reloader"
+  2025-01-13 21:57:06 time="2025-01-13T20:57:06Z" level=warning msg="KUBERNETES_NAMESPACE is unset, will detect changes in all namespaces."
+  2025-01-13 21:57:06 time="2025-01-13T20:57:06Z" level=info msg="created controller for: configMaps"
+  2025-01-13 21:57:06 time="2025-01-13T20:57:06Z" level=info msg="Starting Controller to watch resource type: configMaps"
+  2025-01-13 21:57:06 time="2025-01-13T20:57:06Z" level=info msg="created controller for: secrets"
+  2025-01-13 21:57:06 time="2025-01-13T20:57:06Z" level=info msg="Starting Controller to watch resource type: secrets"
+  ```
+
+  2. After deployment of reloader, the annotation _reloader.stakater.com/auto: "true"_ was applied to the respective deployments and statefulsets of which we want the pods to be restarted upon detecion of configured ConfigMap and Secret changes, as follows:
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: {{ .Values.app.name }}
+    annotations:
+      reloader.stakater.com/auto: "true"     # required annotation for reloader
+
+  ```
+  3. For illustration purpose, we have undertaken a minor modification in ConfigMap _myk8sapp-configmap_ linked to deployment _myk8sapp-deployment_ which makes the deployed reloader detect the changes, which is visible in reloader log as follows:
+
+  ```bash
+  2025-01-13 22:23:48 time="2025-01-13T21:23:48Z" level=info msg="Changes detected in 'myk8sapp-config' of type 'CONFIGMAP' in namespace 'dev'; updated 'myk8sapp' of type 'Deployment' in namespace 'dev'"
+  ```
 
 - #### Illustration of following Kubernetes Pod & Container specific tasks:
 
@@ -374,3 +406,4 @@ kind: Deployment
 ...
 ---
      ```
+

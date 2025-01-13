@@ -7,7 +7,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.app.name }}
   annotations:
-    reloader.stakater.com/auto: "true"
+    reloader.stakater.com/auto: "true"                  # required annotation for reloader
 spec:
   replicas: {{ .Values.app.replicanumber }}
   selector:
