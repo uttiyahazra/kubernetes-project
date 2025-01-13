@@ -4,6 +4,8 @@ metadata:
   labels:
     app: mongo
   name: mongo
+  annotations:
+    {{ .Values.app.annotation | toYaml | nindent 4}}
 spec:
   serviceName: "myk8sapp-mongodb-service"
   replicas: 1

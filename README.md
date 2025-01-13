@@ -48,6 +48,7 @@ version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51b
 ```
 - ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md) 
 - ##### [Deployment of NGINX Ingress Controller and Accessing applications through Ingress](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-nginx-ingress-controller-and-accessing-applications-through-ingress)
+- ##### [Deployment of MongoDB Statefulset and accessing MongoDB to perform basic operations](https://github.com/uttiyahazra/kubernetes-project/blob/develop/myk8sapp/ReadTheDocs.md#deployment-of-mongodb-statefulset-and-accessing-mongodb)
 - ##### [Deployment and Access the Kubernetes Dashboard](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-and-accessing-kubernetes-dashboard)
 - ##### [Installation of Cert-Manager and Generation of Self signed certificate for TLS termination](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#installation-of-cert-manager-and-generation-of-self-signed-certificate-for-tls-termination)
 - ##### [Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-kube-prometheus-stack-and-accessing-prometheus-metrics--grafana-visualizations)
