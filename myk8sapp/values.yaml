@@ -36,7 +36,7 @@ app:
       cpu: 500m
   configmap:
     data:
-      env: "stage specific dynamically overridden from respective value file"
+      env: "testing the changes detectable by reloader"
 
 db:
   name: myk8sappdb
