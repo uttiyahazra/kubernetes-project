@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   name: elasticsearch-ingress
   namespace: logging  #must be the same namespace where elasticsearch  is installed
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-ssl-verify: "false"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    alb.ingress.kubernetes.io/ssl-passthrough: "true"
 spec:
   ingressClassName: "nginx"
   rules:
