@@ -5,7 +5,7 @@ metadata:
     app: mongo
   name: mongo
   annotations:
-    {{ .Values.app.annotation | toYaml | nindent 4}}
+    reloader.stakater.com/auto: "true"
 spec:
   serviceName: "myk8sapp-mongodb-service"
   replicas: 1
