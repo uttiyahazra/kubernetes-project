@@ -4,6 +4,8 @@ metadata:
   labels:
     app: mongo-client
   name: mongo-client
+  annotations:
+    {{ .Values.app.annotation | toYaml | nindent 4}}
 spec:
   replicas: 1
   selector:

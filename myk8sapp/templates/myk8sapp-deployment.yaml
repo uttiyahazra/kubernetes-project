@@ -6,6 +6,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.app.name }}
+  annotations:
+    {{ .Values.app.annotation | toYaml | nindent 4}}
 spec:
   replicas: {{ .Values.app.replicanumber }}
   selector:

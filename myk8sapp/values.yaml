@@ -4,6 +4,7 @@
 
 app: 
   name: myk8sapp
+  annotation: 'reloader.stakater.com/auto: "true"'
   replicanumber: 1
   initcontainer:
     name: httpd
