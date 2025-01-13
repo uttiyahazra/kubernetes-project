@@ -5,7 +5,7 @@ metadata:
     app: mongo-client
   name: mongo-client
   annotations:
-    {{ .Values.app.annotation | toYaml | nindent 4}}
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: 1
   selector:

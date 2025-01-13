@@ -7,7 +7,7 @@ kind: Deployment
 metadata:
   name: {{ .Values.app.name }}
   annotations:
-    {{ .Values.app.annotation | toYaml | nindent 4}}
+    reloader.stakater.com/auto: "true"
 spec:
   replicas: {{ .Values.app.replicanumber }}
   selector:
