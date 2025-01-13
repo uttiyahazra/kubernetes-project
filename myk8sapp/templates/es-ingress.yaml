@@ -2,6 +2,17 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: elasticsearch-ingress
-  namespace: logging  #must be the same namespace where kube-prometheus stack is installed
+  namespace: logging  #must be the same namespace where elasticsearch  is installed
 spec:
-  {{ .Values.elasticsearchIngressSpec | toYaml | nindent 2 }}
+  ingressClassName: "nginx"
+  rules:
+  - host: elasticsearch.ingress.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: elasticsearch
+            port: 
+              number: 9200
