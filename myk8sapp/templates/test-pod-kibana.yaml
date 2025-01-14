@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kibana-check
+  namespace: logging
+spec:
+  containers:
+  - name: count
+    image: busybox
+    args:
+    - /bin/sh
+    - -c
+    - |
+      i=0
+      while true; do
+        echo "Thanks for visiting uttiyahazra's github! $i"
+        i=$((i+1))
+        sleep 1
+      done
