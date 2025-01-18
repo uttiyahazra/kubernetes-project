@@ -46,6 +46,17 @@ Server Version: v1.30.5
 $ helm version
 version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51bbc2e345e", GitTreeState:"clean", GoVersion:"go1.20.5"}
 ```
+###### WSL Version
+```bash
+$ wsl --version
+WSL version: 2.3.26.0
+Kernel version: 5.15.167.4-1
+WSLg version: 1.0.65
+MSRDC version: 1.2.5620
+Direct3D version: 1.611.1-81528511
+DXCore version: 10.0.26100.1-240331-1435.ge-release
+Windows version: 10.0.22631.4602
+```
 - ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md) 
 - ##### [Deployment of NGINX Ingress Controller and Accessing applications through Ingress](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-nginx-ingress-controller-and-accessing-applications-through-ingress)
 - ##### [Deployment and Access the Kubernetes Dashboard](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-and-accessing-kubernetes-dashboard)
