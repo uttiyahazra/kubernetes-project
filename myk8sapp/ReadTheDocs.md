@@ -312,6 +312,16 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
   2025-01-13 22:23:48 time="2025-01-13T21:23:48Z" level=info msg="Changes detected in 'myk8sapp-config' of type 'CONFIGMAP' in namespace 'dev'; updated 'myk8sapp' of type 'Deployment' in namespace 'dev'"
   ```
 
+- #### Installation of EFK Stack for K8s logging
+
+  In order to facilitate the K8s logging using recommended EFK Stack, the ElasticSearch statefulset, service and ingress, Kibana deployment, service, ingress and Fluentd DaemonSet along with needed ClusterRole, ServiceAccount and ClusterRoleBinding are created (all artifacts are maintained in repository). Afterwards, the ElasticSearch Cluster Health could be verified vy accessing the URL derived from Ingress Host, which will display similar to following output:
+
+  ![alt text](image-1.png)
+
+  After the Kibana Deployment, the Kibana UI Dashboard too can be accessed similarly:
+
+  ![alt text](image-2.png)
+
 - #### Illustration of following Kubernetes Pod & Container specific tasks:
 
   1. ##### Exemplification of In Place Container's CPU & Memory Resource Adjustment
