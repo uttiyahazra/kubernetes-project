@@ -3,4 +3,5 @@ kind: ClusterIssuer
 metadata:
   name: {{ .Values.app.name }}-selfsigned-cluster-issuer
 spec:
-  selfSigned: {}
+  ca: 
+    secretName: {{ .Values.app.name }}-selfsigned-ca

@@ -8,7 +8,7 @@ spec:
  issuerRef:
    name: {{ .Values.app.name }}-selfsigned-cluster-issuer
    kind: ClusterIssuer
- commonName: "ingress.com"
+ commonName: ingress.com
  dnsNames:
  - {{ .Values.app.name }}.ingress.com
  - ingress.com
