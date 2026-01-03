@@ -58,6 +58,10 @@ prometheusIngressSpec:
             name: prometheus-kube-prometheus-prometheus
             port: 
               number: 9090
+  tls:
+  - hosts: 
+    - prometheus.ingress.com
+    secretName: prometheus-tls-key-pair
 
 argocdServerIngressSpec:
   ingressClassName: "nginx"
@@ -86,6 +90,10 @@ prometheusGrafanaIngressSpec:
             name: prometheus-grafana
             port: 
               number: 80
+  tls:
+  - hosts: 
+    - prometheus-grafana.ingress.com
+    secretName: prometheus-grafana-tls-key-pair
 
 prometheusExporterIngressSpec:
   ingressClassName: "nginx"

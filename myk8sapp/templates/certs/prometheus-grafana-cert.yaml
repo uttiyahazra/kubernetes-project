@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+ name: prometheus-grafana-selfsigned-tls
+spec:
+ secretName: prometheus-grafana-tls-key-pair
+ isCA: true
+ issuerRef:
+   name: {{ .Values.app.name }}-selfsigned-cluster-issuer
+   kind: ClusterIssuer
+ commonName: ingress.com
+ dnsNames:
+ - prometheus-grafana.ingress.com
+ - ingress.com
