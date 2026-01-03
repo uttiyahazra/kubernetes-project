@@ -1,11 +1,16 @@
-#### A Sample Kubernetes Project With Useful Illustrations
-- ##### Environment specification
+# A Sample Kubernetes Project With Useful Illustrations
 
-###### Operating System
+This repository demonstrates deploying and managing applications on Kubernetes using Helm, Ingress, Cert‑Manager, Prometheus, ArgoCD, and more. It also includes practical illustrations of pod/container behaviors and logging/monitoring stacks.
+
+---
+
+## 🚀 Environment Specification
+
+### Operating System
 ```bash
 Windows 11
 ```
-###### Docker Desktop & Docker Engine Version
+### Docker Desktop & Engine
 ```bash 
 $ docker version
 Client:
@@ -34,19 +39,19 @@ Server: Docker Desktop 4.37.1 (178610)
   Version:          0.19.0
   GitCommit:        de40ad0
 ```
-###### Kubernetes Vesrion
+### Kubernetes Vesrion
 ```bash
 $ kubectl version
 Client Version: v1.30.5
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 Server Version: v1.30.5
 ```
-###### Helm Version
+### Helm Version
 ```bash
 $ helm version
 version.BuildInfo{Version:"v3.12.2", GitCommit:"1e210a2c8cc5117d1055bfaa5d40f51bbc2e345e", GitTreeState:"clean", GoVersion:"go1.20.5"}
 ```
-###### WSL Version
+### WSL Version
 ```bash
 $ wsl --version
 WSL version: 2.3.26.0
@@ -57,17 +62,21 @@ Direct3D version: 1.611.1-81528511
 DXCore version: 10.0.26100.1-240331-1435.ge-release
 Windows version: 10.0.22631.4602
 ```
-- ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md) 
-- ##### [Deployment of NGINX Ingress Controller and Accessing applications through Ingress](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-nginx-ingress-controller-and-accessing-applications-through-ingress)
-- ##### [Deployment and Access the Kubernetes Dashboard](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-and-accessing-kubernetes-dashboard)
-- ##### [Installation of Cert-Manager and Generation of Self signed certificate for TLS termination](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#installation-of-cert-manager-and-generation-of-self-signed-certificate-for-tls-termination)
-- ##### [Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-kube-prometheus-stack-and-accessing-prometheus-metrics--grafana-visualizations)
-- ##### [Deployment of Prometheus-Exporter for a MongoDB Application and Accessing MongoDB Prometheus Metrics](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-prometheus-exporter-for-a-mongodb-application-to-make-mongodb-metrics-fetched-in-prometheus-endpoint)
-- ##### [Deployment of ArgoCD and Leveraging Continuous Deployment with it](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#deployment-of-argocd-and-leveraging-continuos-deployment-with-it)
-- ##### [Illustration of Stakater Reloader](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#illustration-of-stakater-reloader)
-- ##### [Installation of EFK Stack for K8s logging](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#installation-of-efk-stack-for-k8s-logging)
-- ##### [Illustration of following Kubernetes Pod & Container specific tasks:](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#illustration-of-following-kubernetes-pod--container-specific-tasks)
-  1. ###### [In Place Container's CPU & Memory Resource Adjustment](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#exemplification-of-in-place-containers-cpu--memory-resource-adjustment)
-  2. ###### [Different Pod QoS in action](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#exemplification-of-different-pod-qos)
-  3. ##### [Illustration of Native SideCar](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/ReadTheDocs.md#illustration-of-native-sidecar-container)
+
+## 📂 Project Documentation
+Detailed walkthroughs and illustrations are available in ReadTheDocs.md.
+
+- ##### [Deployment of a staged application with Helm](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md) 
+- ##### [Deployment of NGINX Ingress Controller and Accessing applications through Ingress](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#deployment-of-nginx-ingress-controller-and-accessing-applications-through-ingress)
+- ##### [Deployment and Access the Kubernetes Dashboard](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#deployment-and-accessing-kubernetes-dashboard)
+- ##### [Installation of Cert-Manager and Generation of Self signed certificate for TLS termination](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#installation-of-cert-manager-and-generation-of-self-signed-certificate-for-tls-termination)
+- ##### [Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#deployment-of-kube-prometheus-stack-and-accessing-prometheus-metrics--grafana-visualizations)
+- ##### [Deployment of Prometheus-Exporter for a MongoDB Application and Accessing MongoDB Prometheus Metrics](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#deployment-of-prometheus-exporter-for-a-mongodb-application-to-make-mongodb-metrics-fetched-in-prometheus-endpoint)
+- ##### [Deployment of ArgoCD and Leveraging Continuous Deployment with it](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#deployment-of-argocd-and-leveraging-continuos-deployment-with-it)
+- ##### [Illustration of Stakater Reloader](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#illustration-of-stakater-reloader)
+- ##### [Installation of EFK Stack for K8s logging](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#installation-of-efk-stack-for-k8s-logging)
+- ##### [Illustration of following Kubernetes Pod & Container specific tasks:](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#illustration-of-following-kubernetes-pod--container-specific-tasks)
+  1. ###### [In Place Container's CPU & Memory Resource Adjustment](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#exemplification-of-in-place-containers-cpu--memory-resource-adjustment)
+  2. ###### [Different Pod QoS in action](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#exemplification-of-different-pod-qos)
+  3. ##### [Illustration of Native SideCar](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#illustration-of-native-sidecar-container)
 _to be continued_
