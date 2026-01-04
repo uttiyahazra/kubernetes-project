@@ -304,12 +304,14 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
   In order to facilitate the K8s logging using recommended EFK Stack, the ElasticSearch statefulset, service and ingress, Kibana deployment, service, ingress and Fluentd DaemonSet along with needed ClusterRole, ServiceAccount and ClusterRoleBinding are created (all artifacts are maintained in repository). Afterwards, the ElasticSearch Cluster Health could be verified by accessing the URL derived from Ingress Host, which will display similar to following output:
 
   **ElasticSearch visualization**
-  <img src="ElasticSearch.png" width="200" height="200">
+  ![ElasticSearch visualization](./myk8sapp/docs/ElasticSearch.png)
 
   After the Kibana Deployment, the Kibana UI Dashboard too can be accessed similarly:
 
   **Kibana visualization**
-  <img src="Kibana UI.png" width="200" height="200">
+  ![Kibana visualization](./myk8sapp/docs/Kibana_UI.png)
+
+ 
 
 - #### Illustration of following Kubernetes Pod & Container specific tasks:
 
