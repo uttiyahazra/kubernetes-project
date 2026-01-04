@@ -223,11 +223,9 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
    ```
    - After the above configuration adjustments, the endpoint **https://myk8sapp-dev.ingress.com** can be accessed in web-browser where it will be rediected over HTTPS, 
    
-    **App accessibility over Ingress URL**
+    **App accessibility over Ingress URL and Certificate**
     ![App accessibility](myk8sapp-dev_browser_screenshot.png)
     
-
-    **Certificate**
     ![Certificate](myk8sapp-dev_cert.png)
     
 
