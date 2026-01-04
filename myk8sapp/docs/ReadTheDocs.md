@@ -225,6 +225,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
    
     **App accessibility over Ingress URL**
     ![App accessibility](myk8sapp-dev_browser_screenshot.png)
+    
 
     **Certificate**
     ![Certificate](myk8sapp-dev_cert.png)
