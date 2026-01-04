@@ -93,11 +93,12 @@ Detailed walkthroughs and illustrations are available in ReadTheDocs.md.
 ### 🗂️ Repository Structure
 
 ```ascii
-kubernetes-project		
+kubernetes-project
 ├── .git
 ├── README.md
 ├── googleeadd32ffd796da1a.html
 ├── helperScripts
+│   ├── loadgen.sh
 │   └── tree.py
 └── myk8sapp
     ├── .helmignore
@@ -116,7 +117,8 @@ kubernetes-project
     │   │   └── prometheus-grafana-cert.yaml
     │   ├── config
     │   │   ├── mongodb-secrets.yaml
-    │   │   └── myk8sapp-configmap.yaml
+    │   │   ├── myk8sapp-configmap.yaml
+    │   │   └── myk8sapp-servicemonitor.yaml
     │   ├── deployments
     │   │   ├── es-cluster-statefulset.yaml
     │   │   ├── fluentd-daemonset.yaml
