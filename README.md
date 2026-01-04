@@ -63,7 +63,7 @@ DXCore version: 10.0.26100.1-240331-1435.ge-release
 Windows version: 10.0.22631.4602
 ```
 
-## 📂 Project Documentation
+## 📦 Project Documentation
 Detailed walkthroughs and illustrations are available in ReadTheDocs.md.
 
 ### Core Deployments
@@ -90,4 +90,65 @@ Detailed walkthroughs and illustrations are available in ReadTheDocs.md.
 - ##### [Different Pod QoS in action](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#exemplification-of-different-pod-qos)
 - ##### [Illustration of Native SideCar](https://github.com/uttiyahazra/kubernetes-project/blob/master/myk8sapp/docs/ReadTheDocs.md#illustration-of-native-sidecar-container)
 
-_to be continued_
+### 🗂️ Repository Structure
+
+```ascii
+kubernetes-project		
+├── .git
+├── README.md
+├── googleeadd32ffd796da1a.html
+├── helperScripts
+│   └── tree.py
+└── myk8sapp
+    ├── .helmignore
+    ├── Chart.yaml
+    ├── docs
+    │   ├── CertManager.png
+    │   ├── ElasticSearch.png
+    │   ├── Kibana UI.png
+    │   └── ReadTheDocs.md
+    ├── templates
+    │   ├── _helpers.tpl
+    │   ├── certs
+    │   │   ├── clusterissuer.yaml
+    │   │   ├── myk8sapp-cert.yaml
+    │   │   ├── prometheus-cert.yaml
+    │   │   └── prometheus-grafana-cert.yaml
+    │   ├── config
+    │   │   ├── mongodb-secrets.yaml
+    │   │   └── myk8sapp-configmap.yaml
+    │   ├── deployments
+    │   │   ├── es-cluster-statefulset.yaml
+    │   │   ├── fluentd-daemonset.yaml
+    │   │   ├── kibana-deployment.yaml
+    │   │   ├── myk8sapp-deployment.yaml
+    │   │   ├── myk8sapp-mongodb-client-deployment.yaml
+    │   │   ├── myk8sapp-mongodb-statefulset.yaml
+    │   │   └── test-pod-kibana.yaml
+    │   ├── ingress
+    │   │   ├── argocd-server-ingress.yaml
+    │   │   ├── es-ingress.yaml
+    │   │   ├── kibana-ingress.yaml
+    │   │   ├── kube-dashboard-ingress.yaml
+    │   │   ├── myk8sapp-ingress.yaml
+    │   │   ├── prometheus-exporter-ingress.yaml
+    │   │   ├── prometheus-grafana-ingress.yaml
+    │   │   └── prometheus-ingress.yaml
+    │   ├── rbac
+    │   │   ├── fluentd-clusterrole.yaml
+    │   │   ├── fluentd-crb.yaml
+    │   │   ├── fluentd-sa.yaml
+    │   │   └── myk8sapp-serviceaccount.yaml
+    │   ├── services
+    │   │   ├── es-service.yaml
+    │   │   ├── kibana-service.yaml
+    │   │   ├── myk8sapp-mongodb-service.yaml
+    │   │   └── myk8sapp-service.yaml
+    │   └── storage
+    │       ├── myk8sapp-mongodb-pv.yaml
+    │       └── myk8sapp-mongodb-pvc.yaml
+    ├── values-dev.yaml
+    ├── values-mongodb-exporter.yaml
+    ├── values-prod.yaml
+    └── values.yaml
+```
