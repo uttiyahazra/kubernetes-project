@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Values.app.name }}-servicemonitor
+  namespace: dev
+  labels:
+    release: prometheus   # must match the kube-prometheus-stack release name
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}   # must match the k8sapp Service labels
+  namespaceSelector:
+    matchNames:
+      - dev
+  endpoints:
+    - port: https
+      path: /metrics
+      interval: 15s
+      scheme: http
+      tlsConfig:
+        insecureSkipVerify: true
