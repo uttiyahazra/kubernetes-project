@@ -223,11 +223,12 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
    ```
    - After the above configuration adjustments, the endpoint **https://myk8sapp-dev.ingress.com** can be accessed in web-browser where it will be rediected over HTTPS, 
    
-    **Browser screenshot**
-    <img src="myk8sapp-dev_browser_screenshot.png" width="200" height="200">
+    **App accessibility over Ingress URL**
+    ![App accessibility](myk8sapp-dev_browser_screenshot.png)
+
+    **Certificate**
+    ![Certificate](myk8sapp-dev_cert.png)
     
-    **Used certificate screenshot**
-    <img src="myk8sapp-dev_cert.png" width="200" height="200">
 
     As visible, in this case the CN **ingress.com** has been used in certificate, which is issued by our created self-signed root CA.
 
@@ -309,7 +310,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
   After the Kibana Deployment, the Kibana UI Dashboard too can be accessed similarly:
 
   **Kibana visualization**
-  ![Kibana visualization](Kibana_UI.png)
+  ![Kibana visualization](Kibana.png)
 
  
 
