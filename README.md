@@ -96,6 +96,8 @@ Detailed walkthroughs and illustrations are available in ReadTheDocs.md.
 kubernetes-project
 ├── .git
 ├── README.md
+├── dashboards
+│   └── dashboard.json
 ├── googleeadd32ffd796da1a.html
 ├── helperScripts
 │   ├── loadgen.sh
@@ -106,8 +108,10 @@ kubernetes-project
     ├── docs
     │   ├── CertManager.png
     │   ├── ElasticSearch.png
-    │   ├── Kibana UI.png
-    │   └── ReadTheDocs.md
+    │   ├── Kibana.png
+    │   ├── ReadTheDocs.md
+    │   ├── myk8sapp-dev_browser_screenshot.png
+    │   └── myk8sapp-dev_cert.png
     ├── templates
     │   ├── _helpers.tpl
     │   ├── certs
