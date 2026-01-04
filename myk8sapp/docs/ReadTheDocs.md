@@ -1,61 +1,21 @@
 - #### Deployment of a staged application with Helm
 
-  - ##### Pull the current status of GIT in respective branch:
-```bash
-git Pull
-```
-
-  - ##### Switch to respective develop (e.g.) branch:
-```bash
-git switch develop
-```
-
-  - ##### Check which git branches are available:
-```bash
-git branch
-```
-  - ##### Create a new branch (e.g. feature) and navigate to it:
-```bash
-git checkout -b feature
-```
-  - ##### Add a new file in the branch:
-```bash
-git add .
-```
-  - ##### Commit the added file:
-```bash
-git commit -m "this is a sample commit"
-```
-  - ##### Push the local feature branch to remote:
-```bash
-git push -u origin feature
-```
-  - ##### Then checkout the master branch:
-```bash
-git checkout master
-```
-  - ##### Then merge the updates to master branch:
-```bash
-git merge feature
-```
-  - ##### Then push local master branch to remote:
-```bash
-git push -u origin master
-```
+We aim to create a staged application with Helm. Following are some useful helm commands to get started with it.
+Pre-requisite of the deployment of the application by ```helm install``` is the existent namespaces such as ```dev``` and ```prod``` in this example.
 
   - ##### Create helm chart:
 ```bash
 helm create myk8sapp
 ```
 
-  - ##### Helm install command to install myk8sapp-v1.0 in directory myk8sapp/ and in k8s namespace test
+  - ##### Helm install command to install myk8sapp-v1.0 in directory myk8sapp/ and in (Example) k8s namespace dev:
 ```bash
-helm install myk8sapp-v1.0 myk8sapp/ -n test
+helm install myk8sapp-v1.0 myk8sapp/ -n dev
 ```
 
   - ##### Helm upgrade command to upgrade the installed helm application:
 ```bash
-helm upgrade myk8sapp-v1.0 myk8sapp/ -n test
+helm upgrade myk8sapp-v1.0 myk8sapp/ -n dev
 ```
 
   - ##### Helm template command to check if templating is right without changing in practical:
@@ -90,11 +50,11 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
   After the Helm chart deployment of the application, we have made the deployed application accessible from outside of Cluster using NGINX Ingress Controller. The below steps are followed:
 
-  1. Following the instructions as mentioned in official documentation https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop the nginx-ingress Controller is installed using kubectl manifest files.
+  - Following the instructions as mentioned in official documentation https://kubernetes.github.io/ingress-nginx/deploy/#docker-desktop the nginx-ingress Controller is installed using kubectl manifest files.
 
-  2. The corresponding **spec.ingressClassName: "nginx"** must be mentioned in respective ingress configuration.
+  - The corresponding ```spec.ingressClassName: "nginx"``` must be mentioned in respective ingress configuration.
 
-  3. The hostname mentioned in section spec.rules.host of ingress configuration, must be whitelisted in **C:\Windows\System32\drivers\etc\hosts** to bind it to localhost as follows:
+  - The hostname mentioned in section ```spec.rules.host``` of ingress configuration, must be whitelisted in **C:\Windows\System32\drivers\etc\hosts** to bind it to localhost as follows:
 
     - ##### Example snippet from ...\etc\hosts file:
 
@@ -103,6 +63,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
     127.0.0.1 myk8sapp-dev.ingress.com
     127.0.0.1 myk8sapp-prod.ingress.com
     ```
+    This is equivalent to adding an **A record** to the system host file to trust the ingress URLs, although it's not exactly an **A record** as the ingress URLs are no qualified DNS record in this case.
 
   4. Afterwards the deployed app (staged) can be accessed invoking requisite URLs, as follows:
 
@@ -163,9 +124,9 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
     For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
 
     To help improve our products, anonymous usage data is collected and sent to MongoDB periodically (https://www.mongodb.com/legal/privacy-policy).
-    You can opt-out by running the disableTelemetry() command.
+    we can opt-out by running the disableTelemetry() command.
 
-    ------
+    ```text
     The server generated these startup warnings when booting
     2025-01-12T18:58:03.907+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
     2025-01-12T18:58:07.126+00:00: For customers running the current memory allocator, we suggest changing the contents of the following sysfsFile
@@ -173,7 +134,6 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
     2025-01-12T18:58:07.126+00:00: Your system has glibc support for rseq built in, which is not yet supported by tcmalloc-google and has critical performance implications. Please set the environment variable GLIBC**TUNABLES=glibc.pthread.rseq=0
     2025-01-12T18:58:07.126+00:00: vm.max**map**count is too low
     2025-01-12T18:58:07.126+00:00: We suggest setting swappiness to 0 or 1, as swapping can cause performance problems.
-    ------
 
     test> show dbs
     admin   100.00 KiB
@@ -195,7 +155,7 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
    
    1. For various reasons it might be necessary to access the Kubernetes Cluster through a dashboard for a holistic overview of the cluster. Following the official documentation https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/, the Kubernetes Dashboard was installed.
 
-   2. To make the Kubernetes Dashbaord UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above stated way the host **kube-dashboard.ingress.com** was whitelisted in **.../etc/hosts** configuration. Afterwards the Dashboard UI https://kube-dashboard.ingress.com/ was accessible over web-browser.
+   2. To make the Kubernetes Dashboard UI accessible over deployed NGINX ingress, the respective ingress configuration (part of Helm chart) was added and similar to above stated way the host **kube-dashboard.ingress.com** was whitelisted in **.../etc/hosts** configuration. Afterwards the Dashboard UI https://kube-dashboard.ingress.com/ was accessible over web-browser.
    
    3. We chose to use the **Token** option for login to dashboard. For which the following steps are necessary:
       a. Create an admin-user service account and cluster role binding:
@@ -212,25 +172,48 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
 - #### Installation of cert-manager and generation of self-signed certificate for TLS Termination
 
-   1. Following to the official documentation regarding installation in k8s https://cert-manager.io/docs/installation/kubectl/, the cert-manager resources (CRDs & other components) was installed using static installation way using k8s manifest files. 
+   - As pre-requisite of cert stuff, we create a self-signed root CA with following command:
 
-   2. After the installation, the cluster wide resource ClusterIssuer manifest **myk8sapp-selfsigned-clusterissuer.yaml** (part of Helm Chart) was deployed as we want to be able to request certificates from any namespace in a cluster. Upon deployment of it, the same can be verified by executing below kubectl command:
+   ```bash
+   openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650   -subj "/C=IN/ST=WB/L=Hooghly/O=myk8sapp-dev-CA/CN=myk8sapp-dev-root-CA" -out ca.crt
+   ```
+   It signs itself as trust anchor, afterwards the Secret is created as follows containing root CA:
 
-   ```bash 
+   ```bash
+   kubectl -n cert-manager create secret tls myk8sapp-dev-selfsigned-ca  --cert=ca.crt --key=ca.key
+   ```
+   This is required before the creation of clusterissuer because clusterissuer will hold this CA secret reference when created via helm templating.
+
+   So essentially, the chain will look like as below:
+
+   ```ascii
+   Leaf certificate (Ingress TLS cert)
+     └── Issued by: myk8sapp-dev-root-CA
+           └── Self-signed root CA
+   ```
+   Exactly for same reason, we need to import the root ```ca.crt``` into the Trusted Root Certification Authorities store of our local workstation. So essentially,
+      - The root CA cert you created is self‑signed.
+      - The Ingress TLS cert should be signed by that CA (not self‑signed itself).
+
+   - Following to the official documentation regarding installation in k8s https://cert-manager.io/docs/installation/kubectl/, the cert-manager resources (CRDs & other components) was installed using static installation way using k8s manifest files. 
+
+   - After the installation, the cluster wide resource ClusterIssuer manifest ```myk8sapp-selfsigned-clusterissuer.yaml``` (part of Helm Chart) was deployed as we want to be able to request certificates from any namespace in a cluster. Upon deployment of it, the same can be verified by executing below kubectl command:
+
+   ```bash
    kubectl get clusterissuers myk8sapp-dev-selfsigned-cluster-issuer
    ```
    In the output, the ClusterIssuer CR status should show **READY** as TRUE.
 
-   3. In the designated namespace where the myk8sapp is installed, the self-signed certificate issued by the cluster-issuer (part of Helm Chart) was deployed  which should be used for TLS Termination & expose the application endpoint over HTTPS.
+   - In the designated namespace where the myk8sapp is installed, the self-signed certificate issued by the cluster-issuer (part of Helm Chart) was deployed  which should be used for TLS Termination & expose the application endpoint over HTTPS.
 
-   4. Afterwards, the following annotations & TLS Certificate configuration was updated in ingress configuration:
+   - Afterwards, the following annotations & TLS Certificate configuration was updated in ingress configuration:
 
    ```yaml
    ....
    ....
      annotations:
-       cert-manager.io/clusterissuer: "{{ .Values.app.name }}-selfsigned-cluster-issuer" #annotation reference of cluster-issuer
-       ingress.kubernetes.io/ssl-redirect: "true" #annotation for redirection over HTTPS
+       cert-manager.io/clusterissuer: "{{ .Values.app.name }}-selfsigned-cluster-issuer"   #annotation reference of cluster-issuer
+       ingress.kubernetes.io/ssl-redirect: "true"    #annotation for redirection over HTTPS
    ....
    ....
      tls:
@@ -238,11 +221,15 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
        - {{ .Values.app.name }}.ingress.com
        secretName: {{ .Values.app.name }}-tls-key-pair
    ```
-   5. After the above configuration adjustments, the endpoint https://myk8sapp-dev.ingress.com can be accessed in web-browser where it will be rediected over HTTPS with the known warning message **'Your connection is not private'** where the **Not Secure** option can be clicked and the certificate can be visualized before proceeding to access the app:
+   - After the above configuration adjustments, the endpoint **https://myk8sapp-dev.ingress.com** can be accessed in web-browser where it will be rediected over HTTPS, 
+   
+    **Browser screenshot**
+    <img src="myk8sapp-dev_browser_screenshot.png" width="200" height="200">
+    
+    **Used certificate screenshot**
+    <img src="myk8sapp-dev_cert.png" width="200" height="200">
 
-   ![alt text](image.png)
-
-    As visible, in this case the CN **ingress.com** has been used in self-signed certificate.
+    As visible, in this case the CN **ingress.com** has been used in certificate, which is issued by our created self-signed root CA.
 
 - #### Deployment of Kube-Prometheus Stack and Accessing Prometheus Metrics & Grafana Visualizations
 
@@ -314,13 +301,15 @@ helm install prometheus-exporter prometheus-community/prometheus-mongodb-exporte
 
 - #### Installation of EFK Stack for K8s logging
 
-  In order to facilitate the K8s logging using recommended EFK Stack, the ElasticSearch statefulset, service and ingress, Kibana deployment, service, ingress and Fluentd DaemonSet along with needed ClusterRole, ServiceAccount and ClusterRoleBinding are created (all artifacts are maintained in repository). Afterwards, the ElasticSearch Cluster Health could be verified vy accessing the URL derived from Ingress Host, which will display similar to following output:
+  In order to facilitate the K8s logging using recommended EFK Stack, the ElasticSearch statefulset, service and ingress, Kibana deployment, service, ingress and Fluentd DaemonSet along with needed ClusterRole, ServiceAccount and ClusterRoleBinding are created (all artifacts are maintained in repository). Afterwards, the ElasticSearch Cluster Health could be verified by accessing the URL derived from Ingress Host, which will display similar to following output:
 
-  ![alt text](image-1.png)
+  **ElasticSearch visualization**
+  <img src="ElasticSearch.png" width="200" height="200">
 
   After the Kibana Deployment, the Kibana UI Dashboard too can be accessed similarly:
 
-  ![alt text](image-2.png)
+  **Kibana visualization**
+  <img src="Kibana UI.png" width="200" height="200">
 
 - #### Illustration of following Kubernetes Pod & Container specific tasks:
 
